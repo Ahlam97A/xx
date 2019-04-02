@@ -13,10 +13,12 @@ if($link === false){
 $payload = file_get_contents('php://input');
 $input = json_decode($payload, true);
 
+//$x="SELECT count(*)FROM student";
+//echo $x;
 
 
 
-$sql = "SELECT level,section FROM teacher WHERE id='11'";
+$sql = "SELECT level,section FROM teacher WHERE id='11' ORDER BY level,section ASC ";
 
 $myArray = array();
 
@@ -24,9 +26,11 @@ if ($result = $link->query($sql)) {
    
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
         
-        $myArray[] = $row;    
+        $myArray[] = $row; 
+                                                 
         
     }
+
     echo json_encode($myArray);
 }
 

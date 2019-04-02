@@ -15,7 +15,18 @@ $input = json_decode($payload, true);
 
 //echo json_encode($input);
 
+
+//The URL with parameters / query string.
+$url = 'http://localhost:3000/admin/Students/id=?';
  
-header("Location: ../Grades/get.php?level=$input");
+//Once again, we use file_get_contents to GET the URL in question.
+$contents = file_get_contents($url);
+ 
+//If $contents is not a boolean FALSE value.
+if($contents !== false){
+    //Print out the contents.
+    echo $contents;
+}
+//header("Location: ../Grades/get.php?level=$input");
 mysqli_close($link);
 ?>

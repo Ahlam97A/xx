@@ -30,14 +30,26 @@ $sub = $input['subject'];
 $sem = $input['sel_s'];
 $type= $input['sel_t'];
 $max=$input['max'];
-$min = $input['min'];
+
 $date = $input['date'];
 
+$sql = "INSERT INTO Exam(level,subject,semester, max,type,date ) VALUES ('$lev','$sub','$sem','$max','$type','$date')";
+
+//echo $sql."<br/>";
+//$sql_1=mysqli_query($conn,$sql);
+/*
+$row=mysqli_fetch_row($sql_1);
+$someString = (string)($row[0]);
+echo $someString;
+echo "<br>";
 
 
+$str_arr = preg_split ("/\,/",  $someString,0,True); 
+for($i=0;$i<count($str_arr);$i++){
+     echo $str_arr[$i]."<br/>";
+}
 
-
-$sql = "INSERT INTO Exam(level,subject,semester, max,min,type,date ) VALUES ('$lev','$sub','$sem','$max','$min','$type','$date')";
+*/
 
 
 //$result = $conn->query($sql);
@@ -55,3 +67,5 @@ if(mysqli_query($conn, $sql)){
 
 
 ?>
+
+

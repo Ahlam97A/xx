@@ -1,34 +1,17 @@
-
-
-
-
 import InputLabel from "@material-ui/core/InputLabel";
-import withStyles from "@material-ui/core/styles/withStyles";
 import Search from '@material-ui/icons/Search';
-import { Edit } from '@material-ui/icons/Edit';
-
+import withStyles from "@material-ui/core/styles/withStyles";
 import React from "react";
-
-import Build from 'views/Maps/tablee';
-
-import Card from "components/Card/Card.jsx";
-
-import avatar from "assets/img/faces/marc.jpg";
-
 import Add from 'views/Maps/add';
-
-import Table from "components/Table/Table.jsx";
-import Tasks from "components/Tasks/Tasks.jsx";
+import Build from 'views/Maps/tablee';
+import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-import CardAvatar from "components/Card/CardAvatar.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import InputForm from "./InputForm";
-import Evaluation from './eval';
+
 
 const styles = {
     cardCategoryWhite: {
@@ -86,11 +69,10 @@ function postData(url , data ) {
 }
 
 
-//function EditCriteria(props) {
+
 class EditCriteria extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {flag:false};
         this.getTable=this.getTable.bind(this);
         this. onClick=this. onClick.bind(this);
@@ -106,19 +88,11 @@ class EditCriteria extends React.Component {
     }
    
   
-  getTable(){
-      
-    getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php`, this.state)
+  getTable(){ 
+    getData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/activity.php`, this.state)
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error));  
-
-    return(
-        <center>
-            <div>
-                <Build />
-            </div>
-        </center>
-     );
+    return(<center><div><Build /> </div> </center> );
   }
 
 
@@ -127,6 +101,7 @@ class EditCriteria extends React.Component {
     e.preventDefault();
     this.setState({ flag: true });
 }
+
 onClick(e) {
     e.preventDefault();
     this.setState({ flag: true });
@@ -134,88 +109,52 @@ onClick(e) {
 
 
 
-
 onSubmit() {
-  
-    return (
-        <div>
-
-
-            {this.state.flag ? <Add /> : <div></div>}
-        </div>
-    );
+    return ( <div>  {this.state.flag ? <Add /> : <div></div>}  </div>  );
 }
-
-
-     
- 
-
-
-
 
     render() {
-        // var props;
         const { classes } = this.props;
-        const styleInput = {
-            width: "100%",
-            alignContent: "Center",
-            height: "20px",
-            margin: "3px 0",
-            border: "1px solid #ccc",
-            borderBottomLeftRadius: "10px",
-            borderBottomRightRadius: "10px",
-            borderTopRightRadius: "10px",
-            borderTopLeftRadius: "10px"
-        };
+        const style11={ alignContent: "Left", width: "20%", color: "#000", margin: "3px 0", height: "20px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
+      
         return (
-            <div style={{ alignContent: "Center" }}>
-
-           
+            <div style={{ alignContent: "Center" }}> 
                 <GridContainer>
-                    <GridItem xs={12} sm={12} md={3}>
+                    <GridItem xs={12} sm={12} md={6}>
                         <Card>
-                            <CardHeader color="info">
-                                <h4 className={classes.cardTitleWhite}> Current_Activities </h4>
-
-                            </CardHeader>
-                            <CardBody>
-                             <center> {this.getTable()}</center>  
-                            </CardBody>
                             
-                            <form onSubmit={this.onSubmit}>
-                                    <CardFooter>
-                                        <Button /*justIcon round*/ color="info" type="submit" value="Search" onClick={this.onClick} /*onClick={this.onClick.bind(this)}*/ >
-                                          {/*  <Search onSubmit={this.onSubmit} />  */}  Add_New_Activity
+                          <form   onSubmit={this.onSubmit}>
+                            <CardHeader color={"danger"}>
+                                <h4 className={classes.cardTitleWhite}>
+                                       <Button color={"danger"} type="submit" value="Search" onClick={this.onClick}  onSubmit={this.onSubmit}>
+                                            Add New Activity
                                         </Button>
-                                    </CardFooter>
-                            </form>
+              
+                                </h4>
+                            </CardHeader>
+                         </form>
+
+                            <CardBody>
+                             {/*  <input placeholder="         Search" style={style11} onChange={this.updateInput} />  */}  
+                                <center> 
+                                         {this.getTable()}
+                                </center>  
+                            </CardBody>
+
+
+
+                            
+
+
                         </Card>
                     </GridItem>
-             {/*    </GridContainer>
-
-
-                <GridContainer>*/} 
-                 
-                { /*   <GridItem xs={12} sm={12} md={4}>
-                        <Card>
-                            <CardHeader color="rose">
-                                <h4 className={classes.cardTitleWhite}> Add_New_Activity</h4>
-
-                            </CardHeader>
-                            <CardBody>
-                             <cenetr> </cenetr>  
-                            </CardBody>
-                        </Card>
-                    </GridItem>*/}
-
-<GridItem>    <Add /></GridItem>
-                 
-
-   <Evaluation/>
-                </GridContainer>
-              
+                    
+                    <GridItem xs={12} sm={12} md={6} style={{ textAlign: "center" }}>    <Add /></GridItem>
+                </GridContainer>   
             </div>
-        );
-    }
-}
+        ); }  }
+         
+  
+    
+
 export default withStyles(styles)(EditCriteria);

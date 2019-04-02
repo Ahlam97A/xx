@@ -37,7 +37,7 @@
 }
 
 .ct-label {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .ct-chart-line .ct-label, .ct-chart-bar .ct-label {
@@ -90,7 +90,7 @@ h3 {
 }
 
 h4 {
-  color:#ecedf1;
+  color:#485ba8;
   font-size: 1.3em;
   line-height: 1.4em;
 }
@@ -108,8 +108,9 @@ h6 {
 }
 
 body {
-  background-color: rgb(45, 123, 146);
-  color: rgb(22, 25, 29);
+  background-color: rgb(241, 245, 248);
+  
+  color: rgb(11, 12, 12);
   
 }
 
@@ -130,7 +131,7 @@ a {
 
 a:hover, a:focus {
  
-  color: #2d49a7;
+  color: #141824;
   text-decoration: none;
 }
 

@@ -38,6 +38,14 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: "/Classes",
+    name: "Classes",
+   
+    icon:  BugReport,
+    component: Icons,
+    layout: "/admin"
+  },
+  {
     path: "/Students",
     name: "Students",
     
@@ -53,14 +61,7 @@ const dashboardRoutes = [
     component: Grades,
     layout: "/admin"
   },
-  {
-    path: "/Classes",
-    name: "Classes",
-   
-    icon:  BugReport,
-    component: Icons,
-    layout: "/admin"
-  },
+  
   {
     path: "/Attendance",
     name: "Attendance",

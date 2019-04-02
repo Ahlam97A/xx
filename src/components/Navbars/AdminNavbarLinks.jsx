@@ -141,13 +141,27 @@ class HeaderLinks extends React.Component {
 
     return (
       <div>
-
-  
+      {/*}
+<nav class="nav nav1" style={{display: "block"}}>
+            <ul>
+                <li>
+                <a href="#">Nav Item</a>
+                    <ul>
+                        <li><a href="#">Subnav Item</a></li>
+                        <li><a href="#">Subnav Item</a></li>
+                        <li><a href="#">Subnav Item</a></li>
+                    </ul>
+                </li>
+                <li></li>
+                </ul>
+                </nav>
+    */}
+  <nav >
       <Button
          // action="Pname.php"
-         color={window.innerWidth > 2000 ? "transparent" : "primary"}
-         justIcon={window.innerWidth > 2000}
-          simple={!(window.innerWidth > 2000)}
+         color={window.innerWidth > 3000 ? "transparent" : "primary"}
+         justIcon={window.innerWidth > 3000}
+          simple={!(window.innerWidth > 3000)}
           aria-label="ExitToAppIcon"
         >
          { /*this.getName()*/}
@@ -174,7 +188,7 @@ class HeaderLinks extends React.Component {
           aria-label="Dashboard"
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
-          color={window.innerWidth > 959 ? "transparent" : "white"}
+          color={window.innerWidth > 959 ? "transparent" : "primary"}
           className={classes.buttonLink}
 
         >
@@ -195,7 +209,7 @@ class HeaderLinks extends React.Component {
             buttonRef={node => {
               this.anchorEl = node;
             }}
-            color={window.innerWidth > 959 ? "transparent" : "white"}
+            color={window.innerWidth > 959 ? "transparent" : "primary"}
             justIcon={window.innerWidth > 959}
             simple={!(window.innerWidth > 959)}
             aria-owns={open ? "menu-list-grow" : null}
@@ -209,7 +223,7 @@ class HeaderLinks extends React.Component {
 
 
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
+          color={window.innerWidth > 959 ? "transparent" : "primary"}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
           aria-label="Person"
@@ -221,7 +235,7 @@ class HeaderLinks extends React.Component {
 
 
 
-
+        </nav>
       </div>
     );
   }

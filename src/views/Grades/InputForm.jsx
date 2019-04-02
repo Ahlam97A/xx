@@ -24,7 +24,7 @@ class InputForm extends React.Component {
             alignContent: "Center",
             height: "20px",
             margin: "3px 0",
-            border: "1px solid #ccc",
+            border: "1px solid #000",
             borderBottomLeftRadius: "10px",
             borderBottomRightRadius: "10px",
             borderTopRightRadius: "10px",

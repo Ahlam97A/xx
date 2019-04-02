@@ -16,7 +16,7 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Form from "views/UserProfile/form1.tsx";
+//import Form from "views/UserProfile/form.tsx";
 import InputForm from './InputForm';
 
 const styles = {
@@ -189,7 +189,7 @@ class UserProfile extends React.Component {
       <div style={{ alignContent: "Center" }}>
       
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={12} md={8} justify="center">
               <CustomTabs
                 title="teacher:"
                 headerColor="info"
@@ -200,16 +200,16 @@ class UserProfile extends React.Component {
                     tabContent: (
                       <GridContainer justify="center">
                       <form action="Edit.php" onSubmit={this.handleSubmit} style={{ alignContent: "Center" }}>
-                        <GridItem xs={12} sm={12} md={10}>
+                        <GridItem xs={12} sm={12} md={10} justify="center">
                           <Card justify="center">
 
-                            <CardHeader color="info">
-                              <h4 className={classes.cardTitleWhite}>Edit Your  Personal Information</h4>
+                            <CardHeader color="info" justify="center">
+                              <h4 className={classes.cardTitleWhite}>Edit Personal Information</h4>
 
                             </CardHeader>
-                            <CardBody>
+                            <CardBody justify="center">
                               <GridContainer justify="center" style={{ alignContent: "Center" }}>
-                                <GridContainer>
+                                <GridContainer justify="center">
                                   <InputForm inputType="number" inputKey="id" inputLabel="User ID: " updateInput={this.updateInput} />
                                   <InputForm inputType="text" inputKey="address" inputLabel="Personal Address : " updateInput={this.updateInput} />
                                   <InputForm inputType="text" inputKey="city" inputLabel="City : " updateInput={this.updateInput} />
@@ -233,21 +233,22 @@ class UserProfile extends React.Component {
                     tabName: "Password",
                     tabIcon: BugReport,
                     tabContent: (
-
+                      
                       <form className={passwordGroupClass}>
-                        <GridItem xs={12} sm={12} md={10}>
-                          <Card>
+                        <GridItem xs={12} sm={12} md={10} justify="center">
+                          <Card justify="center">
 
                             <CardHeader color="info">
-                              <h4 className={classes.cardTitleWhite}>Reset Your Password</h4>
+                              <h4 className={classes.cardTitleWhite}>Reset Password</h4>
 
                             </CardHeader>
                             <CardBody>
-                              <GridContainer justify="center">
+                            <GridContainer justify="center">
                                 <GridContainer justify="center">
-                                  <Form /> 
+                              
                                 </GridContainer>
-                              </GridContainer>
+                                </GridContainer>
+                             
                             </CardBody>
 
                             <CardFooter>
@@ -257,6 +258,7 @@ class UserProfile extends React.Component {
                         </GridItem>
 
                       </form>
+                      
 
 
 

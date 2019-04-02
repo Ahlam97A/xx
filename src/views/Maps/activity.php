@@ -16,7 +16,7 @@ $input = json_decode($payload, true);
 
 
 
-$sql = "SELECT Type FROM Activity";
+$sql = "SELECT Type,description FROM Activity";
 
 $myArray = array();
 

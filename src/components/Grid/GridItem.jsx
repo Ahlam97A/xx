@@ -12,7 +12,7 @@ const style = {
 function GridItem({ ...props }) {
   const { classes, children, ...rest } = props;
   return (
-    <Grid item {...rest} className={classes.grid}>
+    <Grid item {...rest}  className={classes.grid}>
       {children}
     </Grid>
   );
