@@ -25,7 +25,10 @@ $payload = file_get_contents('php://input');
 $input = json_decode($payload, true);
 
 
-$lev = $input['level'];
+//$lev = $input['level'];
+//$section=$input['section'];
+$param1=$_GET['param1'];
+$param2=$_GET['param2'];
 $sub = $input['subject'];
 $sem = $input['sel_s'];
 $type= $input['sel_t'];
@@ -33,7 +36,7 @@ $max=$input['max'];
 
 $date = $input['date'];
 
-$sql = "INSERT INTO Exam(level,subject,semester, max,type,date ) VALUES ('$lev','$sub','$sem','$max','$type','$date')";
+$sql = "INSERT INTO Exam(level,classid,subject,semester, max,type,date ) VALUES ('$param2','$param1','$sub','$sem','$max','$type','$date')";
 
 //echo $sql."<br/>";
 //$sql_1=mysqli_query($conn,$sql);

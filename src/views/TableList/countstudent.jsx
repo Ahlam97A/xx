@@ -60,15 +60,18 @@ class Countstudent extends Component {
 
 
         //this.getData = this.getData.bind(this);
-        this.handleSubmit5 = this.handleSubmit5.bind(this);
+       // this.handleSubmit5 = this.handleSubmit5.bind(this);
     }
 
 
 
     componentDidMount() {
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter1 = pathArray.pop();
         var th = this;
         //this.serverRequest = axios.get(this.props.source)
-        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Icons/countstudent.php`)
+        getData(`http://localhost/test_project-master%20(4)/test_project-master/src/views/TableList/countstudent.php?param1=` + lastParameter1 + `&param2=` + lastParameter)
             .then(function (event) {
                 th.setState({
                     data: event//.data
@@ -86,17 +89,6 @@ class Countstudent extends Component {
         this.setState(state);
     }
 
-
-
-    handleSubmit5 = (event) => {
-        event.preventDefault();
-        //alert('Handle it on your own');
-        console.log(this.state);
-        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Icons/getclass.php`, this.state)
-            .then(data => console.log(JSON.stringify(data)))
-            .catch(error => console.error(error));
-
-    }
 
     render() {
         //   const { classes } = props;
@@ -117,15 +109,13 @@ class Countstudent extends Component {
         return (
             <div className="Table">
 
-                            {
-                                this.state.data.map((row, i) => (
+                {
+                    this.state.data.map((row, i) => (
+                        <div key={i}>{row}</div>
+                        
+                    ))}
+                    
 
-                                   <div key={i}>{row}</div>
-                                            
-                                     
-
-                                ))}
-               
             </div>
         );
     }

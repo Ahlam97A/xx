@@ -13,7 +13,7 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import InputForm from '../UserProfile/InputForm';
 
-
+import Icon from '@material-ui/core/Icon';
 import Add from './add';
 
 
@@ -74,7 +74,10 @@ class Build extends Component {
 
     componentDidMount() {
         var th = this;
-        getData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/activity.php`)
+        var pathArray = window.location.pathname.split( '/' );
+        var lastParameter = pathArray.pop();
+        var lastParameter_id=pathArray.pop();
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=`+lastParameter_id+`&param2=`+lastParameter)
             .then(function (event) {
                 th.setState({ data: event });  })       
     }
@@ -115,7 +118,7 @@ class Build extends Component {
 
    onSubmit=(e)=>{
     e.preventDefault();
-    postData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/testt/test.php`, this.state)
+    postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/testt/test.php`, this.state)
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error));
    }
@@ -125,7 +128,7 @@ class Build extends Component {
     handleSubmit5 = (event) => {
         event.preventDefault();
         console.log(this.state);
-        getData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/activity.php`, this.state)
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php`, this.state)
             .then(data => console.log(JSON.stringify(data)))
             .catch(error => console.error(error));
 
@@ -191,11 +194,12 @@ class Build extends Component {
             alignItems: "Center",
            // color:{"danger"},       
           };
-          const style11={ alignContent: "Left", width: "100%", color: "#000", margin: "3px 0", height: "30px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
+          const style11={ alignContent: "Left", width: "40%", color: "#000", margin: "3px 0", height: "30px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
         return (
             /*  <form  action="test.php" onSubmit={this.handleSubmit} > */
                 <div className="Table">
-
+                
+                <label  style={{ color: "#9fe58a", alignContent: "Center",height: "30px" } }>Search By Type/Description</label>
                 <input
                     style={style11}
                     type="search"
@@ -205,25 +209,52 @@ class Build extends Component {
                 />
 
 
-                    <table style={{ background: "white", border: " 1px solid rose" }} onChange={this.props.get}>
-
-                        <thead style={{ border: " 1px solid blue", background: "blue" }}>
-                            <tr></tr>
-                        </thead>
+<center>
+            <div>
 
 
-                        <tbody> 
+                                                  
+                                                            <table style={{ background: "white", border: " 1px solid #9fe58a" }} onChange={this.props.get}>
+                                                                <thead style={{ border: " 5px solid #9fe58a", background: "#9fe58a" }}>
+                                                                    <tr>
+                                                                        <td>Type Of Activity</td>
+                                                                        <td>Simple Description</td>
+                                                                         <td>Behavior</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                               
                         {
                                 this.state.data.map((item, i) =>
                                     <tr key={i}>
-                                        <td>
-                                         <tr>
+                                        
+                                         {/*<tr>
                                           <input   style={styleInput} type="text" id="submit" name="submit" value={item.Type} onChange={this.updateInput3}>
                                           </input> 
                                           <input   style={styleInput} type="text" id="submit" name="submit" value={item.description} onChange={this.updateInput3}>
                                           </input> 
-                                          </tr>  
-                                        </td>
+                                          </tr> */}
+
+                                           <td>{item.Type}</td>
+                                           <td>{item.description}</td>
+                                           <td>
+                                           <Button color="white" type="submit" > 
+                                           <Icon style={{ fontSize: 20 }} 
+                                                    onClick={
+                                                        //this.togglePopup.bind(this)
+                                                        (e)=>{
+                                                            var pathArray = window.location.pathname.split( '/' );
+                                                            var lastParameter = pathArray.pop();
+                                                            var lastParameter_id=pathArray.pop();
+                                                            var data = [...this.state.data];
+                                                             window.location.assign('/admin/Activities_grades/'+lastParameter_id+'/'+lastParameter+'/'+item.Type+'/'+item.description);
+                                                        }
+                                                    }
+                                              >add_circle 
+                                           </Icon> </Button>
+                                           </td>
+                                       
                                     </tr>
                                 )
                         }
@@ -231,7 +262,8 @@ class Build extends Component {
 
                     </table>
                 </div>
-          /*  </form> */
+      </center>
+      </div>
         );
     }
 }

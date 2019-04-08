@@ -107,7 +107,7 @@ export default withStyles(iconsStyle)(Icons);
 import withStyles from "@material-ui/core/styles/withStyles";
 import Hidden from "@material-ui/core/Hidden";
 
-import React,{Component} from "react";
+import React, { Component } from "react";
 
 import Card from "components/Card/Card.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -121,77 +121,78 @@ import Build from 'views/Icons/Table';
 
 
 
-function getData(url ) {
+function getData(url) {
   return fetch(url, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-          "Content-Type": "application/json",
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
 
-          "Content-Type": "application/x-www-form-urlencoded",
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      //body: JSON.stringify(data), // body data type must match "Content-Type" header
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    redirect: "follow", // manual, *follow, error
+    referrer: "no-referrer", // no-referrer, *client
+    //body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
-      .then(response => response.json()); // parses response to JSON
+    .then(response => response.json()); // parses response to JSON
 }
 
 
 
- 
-  class Icons extends React.Component {
 
-    constructor(props){
-          super(props);
-          this.state={
-            data:[],
-          };
+class Icons extends React.Component {
 
-          this.getClasses=this.getClasses.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
 
-    getClasses=(e)=>{
-      getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Icons/getclass.php`)
-          .then(function (event) {
-              //  this.setState({
-               //     data: event//.data
-               // });
-            })
+    this.getClasses = this.getClasses.bind(this);
+  }
 
-        return(<div><Build/></div>);
-    }
+  getClasses = (e) => {
+    getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Icons/getclass.php`)
+      .then(function (event) {
+        //  this.setState({
+        //     data: event//.data
+        // });
+      })
+
+    return (<div><Build /></div>);
+  }
 
 
 
-  render(){
+  render() {
     const { classes } = this.props;
-  return (
-    <GridContainer justify="center">
-      <GridItem xs={12} sm={12} md={11}>
-        <Card plain>
+    return (
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={12}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+              <Card>
 
-          <CardHeader plain color="info">
-           <center><h4 className={classes.cardTitleWhite} > ALL My Available Classes </h4></center> 
-           <p className={classes.cardCategoryWhite}></p>  
-          </CardHeader>
+                <CardHeader plain color="info">
+                  <center><h4 className={classes.cardTitleWhite} > My Available Classes </h4></center>
+                  <p className={classes.cardCategoryWhite}></p>
+                </CardHeader>
+                <CardBody>
+                  <div style={{ width: "100%", textAlign: "center" }} >
 
-          <CardBody>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={10}>
-                <Card >
-                 <center>{this.getClasses()}</center>  
-                </Card>
-              </GridItem>
-            </GridContainer>
+                    <center>{this.getClasses()}</center>
+                  </div>
+                </CardBody>
 
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-  );}
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </GridItem>
+      </GridContainer>
+    );
+  }
 }
 
 

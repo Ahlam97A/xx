@@ -15,8 +15,9 @@ $input = json_decode($payload, true);
 
 
 
-
-$sql = "SELECT Type,description FROM Activity";
+$param1=$_GET['param1'];
+$param2=$_GET['param2'];
+$sql = "SELECT Type,description FROM activity where id_class='$param1' and level='$param2'";
 
 $myArray = array();
 

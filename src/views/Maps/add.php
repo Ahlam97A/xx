@@ -33,12 +33,13 @@ $type = $input['type'];
 //$max=$input['max'];
 //$min = $input['min'];
 $date = $input['date'];
+$desc = $input['desc'];
+$param1=$_GET['param1'];
+$param2=$_GET['param2'];
 
 
 
-
-
-$sql = "INSERT INTO activity(Type,date) VALUES ('$type','$date')";
+$sql = "INSERT INTO activity(level,id_class,Type,date,description) VALUES ('$param2','$param1','$type','$date','$desc')";
 
 
 //$result = $conn->query($sql);

@@ -8,7 +8,7 @@ import Unarchive from "@material-ui/icons/Unarchive";
 import BugReport from "@material-ui/icons/BugReport";
 import Language from "@material-ui/icons/Language";
 import Person from "@material-ui/icons/Person";
-
+import Activities_grades from "views/Activities_grades/Activities_grades.jsx";
 import Maps from "views/Maps/Maps.jsx";
 import Icons from "views/Icons/Icons.jsx";
 import  Grades from 'views/Grades/Grades.jsx';
@@ -79,6 +79,14 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: "/Activities_grades",
+    name: "Activities_grades",
+   
+    icon: BubbleChart,
+    component: Activities_grades,
+    layout: "/admin"
+  },
+  {
     path: "/notifications",
     name: "Messages",
     icon: Notifications,
@@ -87,7 +95,7 @@ const dashboardRoutes = [
   },
   {
     path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
+    name: "grade ",
     
     icon: Unarchive,
     component: UpgradeToPro,

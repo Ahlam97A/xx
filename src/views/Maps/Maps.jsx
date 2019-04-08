@@ -79,6 +79,8 @@ class EditCriteria extends React.Component {
         this.onSubmit=this.onSubmit.bind(this);
        // this.updateInput = this.updateInput.bind(this);
        // this.handleSubmit = this.handleSubmit.bind(this);
+       this.getSection=this.getSection.bind(this);
+       this.getlevel=this.getlevel.bind(this);
     }
 
     updateInput(event) {
@@ -89,14 +91,30 @@ class EditCriteria extends React.Component {
    
   
   getTable(){ 
-    getData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/activity.php`, this.state)
+    var pathArray = window.location.pathname.split( '/' );
+    var lastParameter = pathArray.pop();
+    var lastParameter_id=pathArray.pop();
+    //var url = "/admin/Students/"+lastParameter;
+    getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=`+lastParameter_id+`&param2=`+lastParameter, this.state)
     .then(data => console.log(JSON.stringify(data)))
     .catch(error => console.error(error));  
     return(<center><div><Build /> </div> </center> );
   }
 
-
-  
+  getlevel=(e)=>{
+    var pathArray = window.location.pathname.split( '/' );
+    var lastParameter = pathArray.pop();
+    var lastParameter_id=pathArray.pop();
+    //var url = "/admin/Students/"+lastParameter;
+    return lastParameter ;
+  }
+  getSection=(e)=>{
+    var pathArray = window.location.pathname.split( '/' );
+    var lastParameter = pathArray.pop();
+    var lastParameter_id=pathArray.pop();
+    //var url = "/admin/Students/"+lastParameter;
+    return lastParameter_id ;
+  }
   onClick11(e) {
     e.preventDefault();
     this.setState({ flag: true });
@@ -124,18 +142,30 @@ onSubmit() {
                         <Card>
                             
                           <form   onSubmit={this.onSubmit}>
-                            <CardHeader color={"danger"}>
+                            <CardHeader color={"success"}>
+
+                            <h4 className={classes.cardTitleWhite}>
+
+Current Activities For :
+</h4>
                                 <h4 className={classes.cardTitleWhite}>
-                                       <Button color={"danger"} type="submit" value="Search" onClick={this.onClick}  onSubmit={this.onSubmit}>
-                                            Add New Activity
-                                        </Button>
-              
+                                      {/*}  <Button color={"danger"} type="submit" value="Search" onClick={this.onClick}  onSubmit={this.onSubmit}>
+                                           
+                                        </Button>*/}
+                                      Level : {this.getlevel()}
+
                                 </h4>
+
+                                <h4 className={classes.cardTitleWhite}>
+
+                                Section : {this.getSection()}
+                                </h4>
+
                             </CardHeader>
                          </form>
 
                             <CardBody>
-                             {/*  <input placeholder="         Search" style={style11} onChange={this.updateInput} />  */}  
+                               
                                 <center> 
                                          {this.getTable()}
                                 </center>  

@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
-import color from '@material-ui/core/colors/deepOrange';
-import Button from "components/CustomButtons/Button.jsx";
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import color from '@material-ui/core/colors/deepOrange';
+import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import Icon from '@material-ui/core/Icon';
-import Build from "views/Grades/text";
+import  Search  from '@material-ui/icons/Search';
+import Danger from "components/Typography/Danger.jsx";
+import Close from "@material-ui/icons/Close";
+import React, { Component } from 'react';
+
 import Popup from "reactjs-popup";
+
+import Build from "views/Grades/text";
+
+import Button from "components/CustomButtons/Button.jsx";
 function getData(url = ``, data = {}) {
     // Default options are marked with *
     return fetch(url, {
@@ -61,6 +67,9 @@ class Exam extends Component {
         this.state = {
             data: [],
             searchString: "",
+            searchString1: "",
+            searchString2: "",
+            searchString3: "",
             idString: "",
             priceString: "",
             flag: '',
@@ -70,44 +79,69 @@ class Exam extends Component {
 
         };
         this.updateInput = this.updateInput.bind(this);
-
-        this.onSubmit = this.onSubmit.bind(this);
+        // this.onSubmit = this.onSubmit.bind(this);
         this.onClick = this.onClick.bind(this);
-        this.handleSubmit5 = this.handleSubmit5.bind(this);
+        // this.handleSubmit5 = this.handleSubmit5.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
+        // this.search = this.search.bind(this);
         this.search = this.search.bind(this);
-        this.togglePopup = this.togglePopup.bind(this);
+        this.search1 = this.search1.bind(this);
+        this.search2 = this.search2.bind(this);
+        this.search3 = this.search3.bind(this);
+        // this.togglePopup = this.togglePopup.bind(this);
     }
-    togglePopup() {
-        this.setState({
-            showPopup: !this.state.showPopup
-        });
-    }
+
+
+
+    /*  togglePopup() {
+          this.setState({
+              showPopup: !this.state.showPopup
+          });
+          var pathArray = window.location.pathname.split( '/' );
+          var lastParameter = pathArray.pop();
+          var lastParameter_id=pathArray.pop();
+          var data = [...this.state.data];
+         // window.location.href="http://localhost:3000/admin/upgrade-to-pro";
+         window.location.assign('/admin/upgrade-to-pro/'+lastParameter_id+'/'+lastParameter+'/');
+      }*/
+
+
+
     deleteRow(event) {
         var data = [...this.state.data];
-        //var x=getData(`http://localhost/material-dashboard-react-v1.5.0/src/views/Typography/dele2.php`, this.state);
         data.splice(event, 1);
-
         this.setState({ data });
         event.preventDefault();
-        //alert('Handle it on your own');
         console.log(this.state);
-        getData(`http://localhost/material-dashboard-react-v1.5.0/src/views/Typography/dele2.php`, this.state)
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        var url = "/admin/Grades/" + lastParameter;
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/dele2.php?param1=` + lastParameter_id + `&param2=` + lastParameter, this.state)
             .then(data => console.log(JSON.stringify(data)))
             .catch(error => console.error(error));
-
     }
 
-    deleteall = (event) => {
-        event.preventDefault();
-        //alert('Handle it on your own');
-        console.log(this.state);
-        postData(`http://localhost/material-dashboard-react-v1.5.0/src/views/Typography/delete_all.php`, this.state)
-            .then(data => console.log(JSON.stringify(data)))
-            .catch(error => console.error(error));
 
 
-    }
+    /*  deleteall = (event) => {
+          event.preventDefault();
+          //alert('Handle it on your own');
+          var data = [...this.state.data];
+         // data.splice(event, 1);
+          this.setState({ data });
+          event.preventDefault();
+          console.log(this.state);
+          var pathArray = window.location.pathname.split( '/' );
+          var lastParameter = pathArray.pop();
+          var lastParameter_id=pathArray.pop();
+          var url = "/admin/Grades/"+lastParameter;
+          getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/delete_all.php?param1=`+lastParameter_id+`&param2=`+lastParameter, this.state)
+              .then(data => console.log(JSON.stringify(data)))
+              .catch(error => console.error(error));
+  
+  
+      }*/
     onClick(e) {
         const { flag } = this.state;
         e.preventDefault();
@@ -124,41 +158,32 @@ class Exam extends Component {
     componentDidMount() {
         var th = this;
         //this.serverRequest = axios.get(this.props.source)
-        getData(`http://localhost/test_project-master%20(4)/test_project-master/src/views/Grades/getexam.php`)
+
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        var url = "/admin/Grades/" + lastParameter;
+        getData(`http://localhost/test_project-master%20(4)/test_project-master/src/views/Grades/getexam.php?param1=` + lastParameter_id + `&param2=` + lastParameter)
             .then(function (event) {
                 th.setState({
                     data: event//.data
                 });
             })
-        // getData(`http://localhost/material-dashboard-react-v1.5.0/src/views/Typography/dele2.php`)
-
     }
-    handleSubmit5 = (event) => {
 
-    }
+
+
     componentWillUnmount() {
         //this.serverRequest.abort();
     }
 
-    onSubmit() {
-        console.log(this.state);
-        //   postData(`http://localhost/test_project-master%20(4)/test_project-master/src/views/Grades/getexam.php`, this.state)
-        //     .then(data => console.log(JSON.stringify(data)))
-        //     .catch(error => console.error(error));
-        return (
-            <div>
-
-
-                {this.state.flag ? <Build /> : <div></div>}
-            </div>
-        );
-    }
 
     updateInput = (event) => {
         let state = {};
         state[event.target.name] = event.target.value;
         this.setState(state);
     }
+
 
     search = (event) => {
         event.preventDefault();
@@ -169,12 +194,8 @@ class Exam extends Component {
                     // item.name == event.target.value ||
                     // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
                     // item.id == Number(event.target.value) ||
-                    item.level.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.subject.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.max.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.date.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
-                    item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                    item.subject.toLowerCase().includes(event.target.value.toLowerCase())
+
                 );
             });
             this.setState({
@@ -187,6 +208,116 @@ class Exam extends Component {
                 ...this.state,
                 data: this.state.data,
                 searchString: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+    search1 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+                    // item.name == event.target.value ||
+                    // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    // item.id == Number(event.target.value) ||
+
+                    // item.id.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString1: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString1: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+    search2 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+                    // item.name == event.target.value ||
+                    // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    // item.id == Number(event.target.value) ||
+
+                    item.max.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString2: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString2: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+
+    search3 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+
+                    //item.date.toLowerCase().includes(event.target.value.toLowerCase())
+                    item.type.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString3: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString3: "",
+
                 // idString: "",
                 // priceString: ""
             });
@@ -199,65 +330,122 @@ class Exam extends Component {
 
 
 
-
     render() {
-        const { searchString } = this.state;
+        const { searchString, searchString1, searchString2, searchString3 } = this.state;
 
         return (
             <div className="Table">
+               <input style={{ width: "15%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                                            type="search" placeholder="Search By Semester" name="search2" value={searchString1}
+                                                            onChange={this.search1} />
+                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
+                                                            onClick={this.onClick} >
 
-                <input style={{ width: "50%", color: "#000", margin: "3px 0", height: "40px", border: "1px solid #000", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                    type="search" placeholder="Search" name="search" value={searchString}
-                    onChange={this.search} />
+                                                            <Search />
+
+                                                        </Button>
+                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                                            type="search" placeholder="Search By Subject" name="search1" value={searchString}
+                                                            onChange={this.search}></input>
+                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
+                                                            onClick={this.onClick}>
+
+                                                            <Search />
+
+                                                        </Button>
+                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                                            type="search" placeholder="Search By Max Point" name="search3" value={searchString2}
+                                                            onChange={this.search2} />
+                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
+                                                            onClick={this.onClick} >
+
+                                                            <Search />
+
+                                                        </Button>
+                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                                            type="search" placeholder="Search By Type" name="search4" value={searchString3}
+                                                            onChange={this.search3} />
+                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
+                                                            onClick={this.onClick} >
+
+                                                            <Search />
+
+                                                        </Button>
+                                                       
+
+
+              
+              
+
+
                 <div style={{ display: 'flex', width: '100%' }}>
+              
+               
                     <Paper style={{
                         width: "100%",
                         align: "center",
-                        size: "30%",
+                        size: "100%",
                         align: "center",
+                        textAlign: "center"
                     }}>
                         <Table style={{
-                            width: "30%",
+                            width: "100%",
                             align: "center",
                             size: "50%"
-                            , minWidth: 100, align: "center"
+                            , minWidth: 100, align: "center",
+                            textAlign: "center"
 
                         }}>
 
-                            <TableHead style={{ color: "#000 bold", Width: "50%", align: "center", background: "rgb(241, 245, 248)" }}>
-                                <TableRow>
-                                    <TableCell>Classes</TableCell>
-                                    <TableCell >Subject</TableCell>
-                                    <TableCell >Semester</TableCell>
-                                    <TableCell >Mark</TableCell>
-                                    <TableCell>Type of Exam</TableCell>
-                                    <TableCell >Date of Exam</TableCell>
-                                    <TableCell >Add Grade</TableCell>
-                                    <TableCell >Delete</TableCell>
 
-                                </TableRow>
 
-                            </TableHead>
+                            <thead style={{ color: "#000 bold", Width: "50%", align: "center", background: "rgb(241, 245, 248)" }} >
+                                <tr >
+                                    <th >Subject</th>
+
+
+                                    <th >Semester</th>
+                                    <th >Mark</th>
+                                    <th >Type of Exam</th>
+                                    <th >Date of Exam</th>
+                                    <th >Add Grades</th>
+                                    <th > <Danger>
+                                        <Close />
+                                    </Danger></th>
+                                </tr>
+                            </thead>
                             <TableBody>
                                 {
                                     this.state.data.map((item, key) =>
 
                                         <TableRow key={key}>
-                                            <TableCell style={{ width: "10%", }}>{item.level}</TableCell>
+                                            {/*   <TableCell style={{ width: "10%", }}>{item.level}</TableCell>*/}
                                             <TableCell style={{ width: "30%", }}>{item.subject}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.semester}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.max}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.type}</TableCell>
-                                            <TableCell style={{ width: "30%", }}>{item.date}</TableCell>
-                                            <TableCell style={{ width: "30%", }}><Icon style={{ fontSize: 30 }} onClick={this.togglePopup.bind(this)}>add_circle</Icon></TableCell>
-                                            {this.state.showPopup ?
-                                                <Popup
-                                                    text='Close Me'
-                                                    closePopup={this.togglePopup.bind(this)}
-                                                />
-                                                : null
-                                            }
-                                            <TableCell style={{ width: "30%", }}><DeleteForeverIcon style={{ fontSize: 40 }} onClick={this.deleteRow} /></TableCell>
+                                            <TableCell style={{ width: "50%", }}>{item.date}</TableCell>
+
+                                            <TableCell style={{ width: "30%", }}>
+                                                <Icon style={{ fontSize: 30 }}
+                                                    onClick={
+                                                        //this.togglePopup.bind(this)
+                                                        (e) => {
+                                                            var pathArray = window.location.pathname.split('/');
+                                                            var lastParameter = pathArray.pop();
+                                                            var lastParameter_id = pathArray.pop();
+                                                            var data = [...this.state.data];
+                                                            window.location.assign('/admin/upgrade-to-pro/' + lastParameter_id + '/' + lastParameter + '/' + item.type + '/' + item.subject + '/' + item.semester + '/' + item.max);
+                                                        }
+                                                    }
+                                                >add_circle
+                                               </Icon>
+                                            </TableCell>
+
+
+
+
+                                            <TableCell style={{ width: "30%", }}><DeleteForeverIcon style={{ fontSize: 40 }} onClick={this.deleteRow.bind(this)} /></TableCell>
                                         </TableRow>
 
 
@@ -269,10 +457,14 @@ class Exam extends Component {
 
 
                             </TableBody>
+
                         </Table>
+
                     </Paper>
+
                 </div>
-            </div>
+                {/*    <TableCell style={{ width: "30%", }}><DeleteForeverIcon style={{ fontSize: 40 }} onClick={this.deleteall} />Delete All</TableCell>
+           */}   </div>
         );
     }
 }

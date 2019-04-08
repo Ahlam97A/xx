@@ -1,28 +1,38 @@
 import BugReport from "@material-ui/icons/BugReport";
 import InputLabel from "@material-ui/core/InputLabel";
+import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import  Search  from '@material-ui/icons/Search';
 
-//import DateFnsUtils from '@date-io/date-fns';
+import Exam from "views/Grades/exam";
+import UpgradeToPro from "views/Grades/xx"
+import React, { Component } from 'react';
+
+import Popup from "reactjs-popup";
+
+import Point from 'views/Grades/edittable';
+
+import CardFooter from "components/Card/CardFooter.jsx";
+
+import App from 'views/Grades/table/index';
+
 import Card from "components/Card/Card.jsx";
 
-import React, { Component } from 'react';
-import Popup from "reactjs-popup";
-import GridItem from "components/Grid/GridItem.jsx";
+import InputForm from 'views/Grades/InputForm';
+
+import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
+
 import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
+
+import GridItem from "components/Grid/GridItem.jsx";
+
+import { TableEditablePage } from "views/Grades/editable_table.jsx";
+
 import GridContainer from "components/Grid/GridContainer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
-import { TableEditablePage } from "views/Grades/editable_table.jsx";
-import InputForm from 'views/Grades/InputForm';
-import Point from 'views/Grades/edittable';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
-import Grid from '@material-ui/core/Grid';
-//import {XX} from 'views/Grades/xx';
-import App from 'views/Grades/table/index';
-import Exam from "views/Grades/exam";
 const style = {
     typo: {
         paddingLeft: "25%",
@@ -106,21 +116,25 @@ export default class Grades extends React.Component {
             checked: false,
             selected: {},
             selectedDate: '',
-            value: '',
-            showPopup: false
+           
+            showPopup: false,
+            searchString: "",
+            searchString1: "",
+            searchString2: "",
+            searchString3: "",
         }
         // this.getlevel=this.getlevel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateInput = this.updateInput.bind(this);
         this.updateInput1 = this.updateInput1.bind(this);
-        this.togglePopup=this.togglePopup.bind(this);
+       // this.togglePopup = this.togglePopup.bind(this);
+        this.search = this.search.bind(this);
+        this.search1 = this.search1.bind(this);
+        this.search2 = this.search2.bind(this);
+        this.search3 = this.search3.bind(this);
 
     }
-    togglePopup() {
-        this.setState({
-          showPopup: !this.state.showPopup
-        });
-      }
+   
     handleCheckboxChange = event => {
         this.setState({ checked: event.target.checked })
     }
@@ -147,39 +161,23 @@ export default class Grades extends React.Component {
         state[event.target.name] = event.target.checked;
         this.setState(state);
     }
-    handleChange11 = event => {
-        let { value, min, max } = event.target;
-        value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+  
 
-        this.setState({ value });
-    };
-    /*  getlevel=(e)=>{
-          e.preventDefault();
-          getData(`http://localhost/xx-master/src/views/Grades/get.php`, this.state)
-              .then(data => console.log(JSON.stringify(data)))
-              .catch(error => console.error(error));
-      }*/
-
-    /*
-        componentDidMount() {
-            postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/create.php`, this.state)
-                .then(data => console.log(JSON.stringify(data)))
-                .catch(error => console.error(error));
-        }
-    */
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state);
-        postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/create.php`, this.state)
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        var url = "/admin/Grades/" + lastParameter;
+        postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/create.php?param1=` + lastParameter_id + `&param2=` + lastParameter, this.state)
             .then(data => console.log(JSON.stringify(data)))
             .catch(error => console.error(error));
-
         e.target.reset();
         // e.target.Checkbox.reset();
-
-
-
     }
+
+
     /*  getsubject=(e)=>{
           e.preventDefault();
           getData(`http://localhost/xx-master/src/views/Grades/gets.php`, this.state)
@@ -194,7 +192,7 @@ export default class Grades extends React.Component {
     // }
     componentDidMount() {
         var th = this;
-        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/getallclass.php`)
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/getexam.php`)
 
             .then(function (event) {
                 if (event != null) {
@@ -208,13 +206,159 @@ export default class Grades extends React.Component {
 
     }
 
+    search = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+                    // item.max == event.target.value ||
+                    // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    // item.id == Number(event.target.value) ||
+                    item.subject.toLowerCase().includes(event.target.value.toLowerCase())
+                   // item.max.toLowerCase().includes(event.target.value.toLowerCase())
+
+
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+                searchString: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+    search1 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+                    // item.name == event.target.value ||
+                    // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    // item.id == Number(event.target.value) ||
+
+                    // item.id.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString1: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString1: "",
+
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+    search2 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+                    // item.name == event.target.value ||
+                    // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    // item.id == Number(event.target.value) ||
+
+                    item.max.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
+                    //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString2: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString2: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+
+    search3 = (event) => {
+        event.preventDefault();
+        if (event.target.value) {
+            // console.log("event.target.value",event.target.value);
+            let filtered = this.state.data.filter(item => {
+                return (
+
+                    //item.date.toLowerCase().includes(event.target.value.toLowerCase())
+                    item.type.toLowerCase().includes(event.target.value.toLowerCase())
+                    //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
+                );
+            });
+            this.setState({
+                ...this.state,
+                searchString3: event.target.value,
+                data: filtered
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                data: this.state.data,
+
+                searchString3: "",
+
+                // idString: "",
+                // priceString: ""
+            });
+            setTimeout(() => {
+                this.componentDidMount();
+            }, 50);
+
+        }
+    };
+
+
+
     render() {
+        const { searchString, searchString1, searchString2, searchString3 } = this.state;
         const styleInput = {
             width: "100%",
             alignContent: "Center",
             height: "25px",
             margin: "3px 0",
-            border: "1px solid #ccc",
+            border: "1px solid #000",
             borderBottomLeftRadius: "10px",
             borderBottomRightRadius: "10px",
             borderTopRightRadius: "10px",
@@ -243,49 +387,41 @@ export default class Grades extends React.Component {
                                     tabName: "Current Exam",
                                     tabIcon: BugReport,
                                     tabContent: (
-                                    <form>
-                                        <GridContainer>
-                                            <GridItem xs={12} sm={12} md={12}>
-                                                <Card>
-                                                    <CardHeader style={{background:"#e3f2fd"}}>
-                                                        <h4>The Avilable Exam</h4>
+                                        <center>
+                                            <form>
+                                                <CardBody>
+                                                    <div style={{ width: "100%", textAlign: "center" }} >
+                                                     
+                                                            <center><Exam /></center>
                                                        
-                                                    </CardHeader>
 
-                                                    <CardBody>
-                                                        <div style={{ width: "100%", textAlign: "center" }} >
-                                                          
-                                                            <Exam />
-                                                        </div>
-                                                    </CardBody>
-
-
-
-                                                </Card>
-                                            </GridItem>
-                                        </GridContainer>
-
-                                    </form>
+                                                    </div>
+                                                </CardBody>
+                                            </form>
+                                        </center>
                                     )
                                 }
+
+
                                 , {
                                     tabName: "Create Exam",
                                     tabIcon: BugReport,
                                     tabContent: (
                                         <form action="create.php" onSubmit={this.handleSubmit} style={{ alignContent: "Center" }}  >
-                                          
-                                            <CardHeader style={{ background: "#fce4ec" }}><h4 >Form to add an Exam</h4></CardHeader>
+
+                                            <CardHeader style={{ background: "#e4f3fc" }}><h4 >Add  New Exam</h4></CardHeader>
                                             <CardBody>
 
-
+                                                {/* 
                                                 <InputForm inputType="text" inputKey="level" inputLabel="Class " updateInput={this.updateInput} />
+                                                <InputForm inputType="text" inputKey="section" inputLabel="Section " updateInput={this.updateInput} /> */}
                                                 <InputForm inputType="text" inputKey="subject" inputLabel="Subject  " updateInput={this.updateInput} />
                                                 <div style={{ display: 'flex', width: '100%' }}>
-                                                    <GridItem xs={12} sm={6} md={12} style={{ textAlign: "center" }} >
+                                                    <GridItem xs={12} sm={6} md={6} style={{ textAlign: "center" }} >
 
                                                         <InputLabel style={{ color: "#000", width: "300px", alignContent: "Center", textAlign: "center" }}> {"     "}Semester     {"   "}  </InputLabel>
                                                     </GridItem>
-                                                    <GridItem xs={12} sm={6} md={12}>
+                                                    <GridItem xs={12} sm={6} md={6}>
                                                         <select name="sel_s" required style={styleInput} onChange={this.updateInput}  >
                                                             <option></option>
                                                             <option name="sel_s">1st Semester</option>
@@ -313,7 +449,7 @@ export default class Grades extends React.Component {
 
 
                                                 <InputForm inputType="date" inputKey="date" inputLabel="Date of Exam  " updateInput={this.updateInput} />
-{/*}
+                                                {/*}
                                                 <input
                                                     value={this.state.value}
                                                     onChange={this.handleChange11}
@@ -415,7 +551,7 @@ export default class Grades extends React.Component {
 */}
                                             </CardBody>
                                             <CardFooter>
-                                                <Button color="info" name="create" type="submit" onSubmit={this.handleSubmit}  value="create">Create </Button>
+                                                <Button color="info" name="create" type="submit" onSubmit={this.handleSubmit} value="create">Create </Button>
                                             </CardFooter>
                                             {/* </GridItem>
                               
@@ -431,8 +567,9 @@ export default class Grades extends React.Component {
 
                         </CustomTabs>
                     </GridItem>
+
                 </GridContainer>
-                <div >
+                {/*  <div >
                     <GridContainer justify="center">
                         <GridItem xs={12} sm={12} md={8}>
                             <CustomTabs
@@ -447,7 +584,7 @@ export default class Grades extends React.Component {
                                                     <CardHeader></CardHeader>
                                                     <CardBody justify="center">
                                                         {/*}  <App />
-                                                    <TableEditablePage/>*/}
+                                                    <TableEditablePage/>
                                                         <Point />
                                                     </CardBody>
 
@@ -463,8 +600,9 @@ export default class Grades extends React.Component {
                             </CustomTabs>
                         </GridItem>
                     </GridContainer>
-                </div>
+                </div> */}
             </div>
         )
     }
 }
+////////

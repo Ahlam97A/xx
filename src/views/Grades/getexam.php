@@ -12,10 +12,10 @@ if($link === false){
 $payload = file_get_contents('php://input');
 $input = json_decode($payload, true);
 
-// Attempt select query execution
-$search=$input['search'];
-//where id='$search'
-$sql = "SELECT * FROM exam ";
+
+$param1=$_GET['param1'];
+$param2=$_GET['param2'];
+$sql = "SELECT * FROM Exam  Where classid='$param1' and level='$param2'";
 
 $myArray = array();
 

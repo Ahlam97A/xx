@@ -215,35 +215,35 @@ class Build extends Component {
                                     <TableRow key={i}>
                                         <TableCell component="th" scope="row"  >
                                        {/* <form onSubmit={this.handleSubmit5}>*/
-                                          /*}  <a href="http://localhost:3000/admin/Classes?={row.level}"> <input className ={row.level+row.section} type="submit" value={row.level+row.section} onClick={e=>this.handleSubmit5(e, row.level,row.section)} name="level" /></a>
+/*}  <a href="http://localhost:3000/admin/Classes?={row.level}"> <input className ={row.level+row.section} type="submit" value={row.level+row.section} onClick={e=>this.handleSubmit5(e, row.level,row.section)} name="level" /></a>
 
-                                            {this.state.showing ? null : <Page />}
-                                           
-                                        </TableCell>
-                                        <TableCell >
-                                            {row.section}
-                                        </TableCell>
+  {this.state.showing ? null : <Page />}
+ 
+</TableCell>
+<TableCell >
+  {row.section}
+</TableCell>
 
-                                        <TableCell >
-                                           
-                                          <a href="http://localhost:3000/admin/Students?class={row.level}">view</a>
-                                        
-                                        </TableCell>
-                                        <TableCell >
-                                            <Countstudent />
-                                        </TableCell>
-                                        <TableCell >
-                                          <input type="submit" value={"view student"+row.level+row.section} onClick={e=>this.send(e, row.level,row.section)} />
-                                        </TableCell>
+<TableCell >
+ 
+<a href="http://localhost:3000/admin/Students?class={row.level}">view</a>
+ 
+</TableCell>
+<TableCell >
+  <Countstudent />
+</TableCell>
+<TableCell >
+<input type="submit" value={"view student"+row.level+row.section} onClick={e=>this.send(e, row.level,row.section)} />
+</TableCell>
 
-                                    </TableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </Paper>
-            </div>
-        );
-    }
+</TableRow>
+))}
+</TableBody>
+</Table>
+</Paper>
+</div>
+);
+}
 }
 */
 //export default Build;
@@ -270,20 +270,20 @@ import Button from "components/CustomButtons/Button.jsx";
 function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-      .then(response => response.text()); // parses response to JSON
-  }
+        .then(response => response.text()); // parses response to JSON
+}
 function getData(url = ``, data = {}) {
     // Default options are marked with *
     return fetch(url, {
@@ -294,7 +294,7 @@ function getData(url = ``, data = {}) {
         headers: {
             "Content-Type": "application/json",
 
-             "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded",
         },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
@@ -355,99 +355,102 @@ class Build extends Component {
 
     }
 
-    send=(e)=>{
+    send = (e) => {
         var data = [...this.state.data];
-       data.splice(e, 1);
-       data.slice(0, 0);
-        this.setState({   data  });
+        data.splice(e, 1);
+        data.slice(0, 0);
+        this.setState({ data });
         e.preventDefault();
         postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Icons/send.php`, this.state)
-        .then(data => console.log(JSON.stringify(data)))
-        .catch(error => console.error(error));
+            .then(data => console.log(JSON.stringify(data)))
+            .catch(error => console.error(error));
     }
 
     render() {
-     //   const { classes } = props;
-        
+        //   const { classes } = props;
 
-const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 700,
-    },
-  });
- 
-       
+
+        const styles = theme => ({
+            root: {
+                width: '100%',
+                marginTop: theme.spacing.unit * 3,
+                overflowX: 'auto',
+            },
+            table: {
+                minWidth: 700,
+            },
+        });
+
+
         return (
             <div className="Table">
-                <table style={{ border: " 1px solid rose" ,align:"center"}} onChange={this.props.get}>
-                    <thead style={{ border: " 1px solid rose", background: "rose"}}>
-                        <tr style={{ border: " 1px solid rose"}}>
-                        <th>Level</th>
-                        <th>Section</th>
-                        <th>Students</th>
-                        <th>Grades</th>
-                        <th>Attendance</th>
-                        <th>Activities</th>
+                <table style={{ border: " 1px solid rose", align: "center" }} onChange={this.props.get}>
+                    <thead style={{ border: " 1px solid rose", background: "rose" }}>
+                        <tr style={{ border: " 1px solid rose" }}>
+                            <th>Level</th>
+                            <th>Section</th>
+                            <th>Students</th>
+                            <th>Grades</th>
+                            <th>Attendance</th>
+                            <th>Activities</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         {
-                            this.state.data.map((item ,i)=>
-                               
+                            this.state.data.map((item, i) =>
+
                                 <tr key={i}>
-                                <td>{item.level}</td>
-                                <td>{item.section}</td>
-                                <td>
-                                        <Button color="rose" type="submit" > <a
+                                    <TableCell>{item.level}</TableCell>
+                                    <TableCell>{item.section}</TableCell>
+                                    <TableCell>
+                                        <Button style={{ background: "#e3f2fd" }} type="submit" > <a
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                window.location.assign('/admin/Students/'+item.section);
-                                            }}> View</a>
+                                                window.location.assign('/admin/Students/' + item.section + '/' + item.level);
+                                            }}>Students</a>
                                         </Button>
-                                </td>
-                                <td>
-                                      <Button color="rose" type="submit" >
-                                      {this.send}
-                                      <a
+                                    </TableCell>
+                                    <TableCell>
+
+                                        <Button style={{ background: "#e3f2fd" }} type="submit" >
+                                            {this.send}
+                                            <a
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+
+                                                    window.location.assign('/admin/Grades/' + item.section + '/' + item.level);
+                                                }}> Grades</a>
+                                        </Button>
+                                    </TableCell>
+                                    <TableCell>
+
+                                        <Button style={{ background: "#e3f2fd" }} type="submit" ><a
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                               
-                                                window.location.assign('/admin/Grades/');
-                                            }}> View</a>
-                                      </Button>
-                                </td>
-                                <td>
-                                   <Button color="rose" type="submit" ><a
+                                                window.location.assign('/admin/Attendance/' + item.section + '/' + item.level);
+                                            }}>Attendance</a>
+                                        </Button>
+                                    </TableCell>
+                                    <TableCell>
+
+                                        <Button style={{ background: "#e3f2fd" }} type="submit" ><a
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                window.location.assign('/admin/Attendance/');
-                                            }}> View</a>
-                                    </Button>
-                                </td>
-                                <td>
-                                     <Button color="rose" type="submit" ><a
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                window.location.assign('/admin/Activities/');
-                                            }}> View</a>
-                                     </Button>
-                                     </td>
+                                                window.location.assign('/admin/Activities/' + item.section + '/' + item.level);
+                                            }}> Activities</a>
+                                        </Button>
+                                    </TableCell>
                                 </tr>
-                               
-                            
+
+
                             )
-                            
-                            
+
+
                         }
-                        
+
                     </tbody>
-                    
+
                 </table>
 
             </div>
@@ -456,13 +459,4 @@ const styles = theme => ({
 }
 
 export default Build
-
-
-
-
-
-
-
-
-
 
