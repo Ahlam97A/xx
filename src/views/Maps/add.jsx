@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import React, { Component } from 'react';
 
 import Card from "components/Card/Card.jsx";
 import Tasks from "components/Tasks/Tasks.jsx";
@@ -14,7 +14,7 @@ import InputForm from './InputForm';
 
 import InputLabel from '@material-ui/core/InputLabel';
 
-function postData(url , data ) {
+function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -31,88 +31,89 @@ function postData(url , data ) {
     })
         .then(response => response.text()); // parses response to JSON
 }
-export default class Add extends React.Component{
+export default class Add extends React.Component {
 
 
-constructor(props){
-    super(props);
-    this.state={
-        data:[],
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+        }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.updateInput = this.updateInput.bind(this);
     }
-    this.onSubmit=this.onSubmit.bind(this);
-    this.updateInput=this.updateInput.bind(this);
-}
-updateInput = (event) => {
-    let state = {};
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-}
+    updateInput = (event) => {
+        let state = {};
+        state[event.target.name] = event.target.value;
+        this.setState(state);
+    }
 
 
-onSubmit=(e)=>{
-    e.preventDefault();
-    var pathArray = window.location.pathname.split( '/' );
-    var lastParameter = pathArray.pop();
-    var lastParameter_id=pathArray.pop();
-    postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/add.php?param1=`+lastParameter_id+`&param2=`+lastParameter, this.state)
-     .then(data => console.log(JSON.stringify(data)))
-     .catch(error => console.error(error)); 
+    onSubmit = (e) => {
+        e.preventDefault();
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/add.php?param1=` + lastParameter_id + `&param2=` + lastParameter, this.state)
+            .then(data => console.log(JSON.stringify(data)))
+            .catch(error => console.error(error));
 
-     e.target.reset();
-}
+        e.target.reset();
+        setTimeout(() => {
+            //this.componentDidMount();
+        }, 50);
+    }
 
-render(){
-    const { classes } = this.props;
-    const styleInput = {
-        width: "100%",
-        alignContent: "Center",
-        height: "40px",
-        margin: "3px 0",
-        border: "1px solid #ccc",
-        borderBottomLeftRadius: "10px",
-        borderBottomRightRadius: "10px",
-        borderTopRightRadius: "10px",
-        borderTopLeftRadius: "10px",
-        
-      };
-    return(
-      <form  action="add.php" onSubmit={this.onSubmit} > 
-       <GridContainer> 
-            <GridItem xs={12} sm={12} md={12}>
-                <Card>
-                    <CardHeader color={"success"}>
-                        <h3> Add_New_Activity</h3>
-                    </CardHeader>
-                    <CardBody>
-                        <center>
-                        <GridContainer>
-                             <GridItem  xs={12} sm={12} md={12}>
-                                  <InputForm inputType="text" inputKey="type" inputLabel="Type " updateInput={this.updateInput} />
-                                  <InputForm /*onChange={this.onChange}*/  inputType="date" inputKey="date" inputLabel="Date " updateInput={this.updateInput} />
-                                  {/*<label  style={{   color: "#000",alignContent: "Center",height: "30px" } }>Description</label>
-                                  <textarea  />*/}
-                                  <div style={{display: 'flex', width: '100%'}}>
-                <GridItem xs={12} sm={6} md={12} style={{ textAlign: "center" }}>
-                    <InputLabel style={{ color: "#000", alignContent: "Center" } }> Description</InputLabel>
-                </GridItem>
-                <GridItem xs={12} sm={6} md={12}>
-                <textarea  name="desc"  type="text" onChange={this.updateInput} required style={styleInput}/>
-                </GridItem>
+    render() {
+        const { classes } = this.props;
+        const styleInput = {
+            width: "100%",
+            alignContent: "Center",
+            height: "40px",
+            margin: "3px 0",
+            border: "1px solid #000",
+            borderBottomLeftRadius: "10px",
+            borderBottomRightRadius: "10px",
+            borderTopRightRadius: "10px",
+            borderTopLeftRadius: "10px",
 
-            </div>
-                             </GridItem>
-                        </GridContainer>
-                        </center>
-                    </CardBody>
+        };
+        return (
+            <form action="add.php" onSubmit={this.onSubmit} >
+                <GridContainer>
+                    <GridItem xs={12} sm={12} md={12}>
+                        <Card>
+                            <CardHeader color={"success"}>
+                                <h4 style={{fontSize:"18px",fontFamily:"Comic Sans MS" }}> Add New Activity</h4>
+                            </CardHeader>
+                            <CardBody>
+                                <center>
+                                    <GridContainer>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <InputForm inputType="text" inputKey="type" inputLabel="Type of Activity " updateInput={this.updateInput} />
+                                            <InputForm inputType="date" inputKey="date" inputLabel="Date of Acitvity" updateInput={this.updateInput} />
+                                           
+                                            <div style={{ display: 'flex', width: '100%' }}>
+                                                <GridItem xs={12} sm={6} md={12} style={{ textAlign: "center" }}>
+                                                    <InputLabel style={{ color: "#000", alignContent: "Center",fontSize:"18px",fontFamily:"Comic Sans MS" }}> Description</InputLabel>
+                                                </GridItem>
+                                                <GridItem xs={12} sm={6} md={12}>
+                                                    <textarea name="desc" type="text" onChange={this.updateInput} required style={styleInput} />
+                                                </GridItem>
+                                            </div>
+                                        </GridItem>
+                                    </GridContainer>
+                                </center>
+                            </CardBody>
 
-                    <CardFooter>
-                    <Button color={"success"} name="add" type="submit" value="Add">Add </Button>
-                    </CardFooter>
-                </Card>
-            </GridItem>
-       </GridContainer>
-       </form>
-    )
-}
+                            <CardFooter>
+                                <Button color={"success"} name="add" type="submit" value="Add">Add </Button>
+                            </CardFooter>
+                        </Card>
+                    </GridItem>
+                </GridContainer>
+            </form>
+        )
+    }
 
 }

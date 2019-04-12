@@ -32,7 +32,7 @@ const styles = {
     }
 };
 
-function getData(url ) {
+function getData(url) {
     return fetch(url, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -40,17 +40,17 @@ function getData(url ) {
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
             "Content-Type": "application/json",
-  
+
             // "Content-Type": "application/x-www-form-urlencoded",
         },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
         //body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-       .then(response => response.json()); // parses response to JSON
-  }
+        .then(response => response.json()); // parses response to JSON
+}
 
-function postData(url , data ) {
+function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -73,14 +73,14 @@ function postData(url , data ) {
 class EditCriteria extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {flag:false};
-        this.getTable=this.getTable.bind(this);
-        this. onClick=this. onClick.bind(this);
-        this.onSubmit=this.onSubmit.bind(this);
-       // this.updateInput = this.updateInput.bind(this);
-       // this.handleSubmit = this.handleSubmit.bind(this);
-       this.getSection=this.getSection.bind(this);
-       this.getlevel=this.getlevel.bind(this);
+        this.state = { flag: false };
+        this.getTable = this.getTable.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        // this.updateInput = this.updateInput.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+        this.getSection = this.getSection.bind(this);
+        this.getlevel = this.getlevel.bind(this);
     }
 
     updateInput(event) {
@@ -88,103 +88,86 @@ class EditCriteria extends React.Component {
         state[event.target.name] = event.target.value;
         this.setState(state);
     }
-   
-  
-  getTable(){ 
-    var pathArray = window.location.pathname.split( '/' );
-    var lastParameter = pathArray.pop();
-    var lastParameter_id=pathArray.pop();
-    //var url = "/admin/Students/"+lastParameter;
-    getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=`+lastParameter_id+`&param2=`+lastParameter, this.state)
-    .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error));  
-    return(<center><div><Build /> </div> </center> );
-  }
-
-  getlevel=(e)=>{
-    var pathArray = window.location.pathname.split( '/' );
-    var lastParameter = pathArray.pop();
-    var lastParameter_id=pathArray.pop();
-    //var url = "/admin/Students/"+lastParameter;
-    return lastParameter ;
-  }
-  getSection=(e)=>{
-    var pathArray = window.location.pathname.split( '/' );
-    var lastParameter = pathArray.pop();
-    var lastParameter_id=pathArray.pop();
-    //var url = "/admin/Students/"+lastParameter;
-    return lastParameter_id ;
-  }
-  onClick11(e) {
-    e.preventDefault();
-    this.setState({ flag: true });
-}
-
-onClick(e) {
-    e.preventDefault();
-    this.setState({ flag: true });
-}
 
 
+    getTable() {
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        //var url = "/admin/Students/"+lastParameter;
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=` + lastParameter_id + `&param2=` + lastParameter)
+            .then(function(event){
+                this.setState({
+                    data:event
+                })
+        
+            })
+        return (<center><div><Build /> </div> </center>);
+    }
 
-onSubmit() {
-    return ( <div>  {this.state.flag ? <Add /> : <div></div>}  </div>  );
-}
+    getlevel = (e) => {
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        //var url = "/admin/Students/"+lastParameter;
+        return lastParameter;
+    }
+    getSection = (e) => {
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter_id = pathArray.pop();
+        //var url = "/admin/Students/"+lastParameter;
+        return lastParameter_id;
+    }
+    onClick11(e) {
+        e.preventDefault();
+        this.setState({ flag: true });
+    }
+
+    onClick(e) {
+        e.preventDefault();
+        this.setState({ flag: true });
+    }
+
+
+
+    onSubmit() {
+        return (<div>  {this.state.flag ? <Add /> : <div></div>}  </div>);
+    }
 
     render() {
         const { classes } = this.props;
-        const style11={ alignContent: "Left", width: "20%", color: "#000", margin: "3px 0", height: "20px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
-      
+        const style11 = { alignContent: "Left", width: "20%", color: "#000", margin: "3px 0", height: "20px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
+
         return (
-            <div style={{ alignContent: "Center" }}> 
+            <div style={{ alignContent: "Center" }}>
                 <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                         <Card>
-                            
-                          <form   onSubmit={this.onSubmit}>
-                            <CardHeader color={"success"}>
 
-                            <h4 className={classes.cardTitleWhite}>
+                            <form onSubmit={this.onSubmit}>
+                                <CardHeader color={"success"}>
 
-Current Activities For :
-</h4>
-                                <h4 className={classes.cardTitleWhite}>
-                                      {/*}  <Button color={"danger"} type="submit" value="Search" onClick={this.onClick}  onSubmit={this.onSubmit}>
-                                           
-                                        </Button>*/}
-                                      Level : {this.getlevel()}
-
-                                </h4>
-
-                                <h4 className={classes.cardTitleWhite}>
-
-                                Section : {this.getSection()}
-                                </h4>
-
-                            </CardHeader>
-                         </form>
-
+                                    <pre className={classes.cardTitleWhite} style={{fontSize:"18px",fontFamily:"Comic Sans MS"}}>
+                                        Current Activities For :     Class : {this.getlevel()}        Section : {this.getSection()}</pre>
+                                </CardHeader>
+                            </form>
                             <CardBody>
-                               
-                                <center> 
-                                         {this.getTable()}
-                                </center>  
+                                <center>
+                                    {this.getTable()}
+                                </center>
                             </CardBody>
-
-
-
-                            
-
-
                         </Card>
                     </GridItem>
-                    
+
                     <GridItem xs={12} sm={12} md={6} style={{ textAlign: "center" }}>    <Add /></GridItem>
-                </GridContainer>   
+                </GridContainer>
             </div>
-        ); }  }
-         
-  
-    
+        );
+    }
+}
+
+
+
 
 export default withStyles(styles)(EditCriteria);

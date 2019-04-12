@@ -382,7 +382,8 @@ class UpgradeToPro extends React.Component {
     var lastParameter4 = pathArray.pop();
     var lastParameter5 = pathArray.pop();
     var lastParameter_id = pathArray.pop();
-    return lastParameter4;
+    var pathArray11 = window.location.pathname.split('%20');
+    return unescape(lastParameter4);
   }
   getMark = () => {
     var pathArray = window.location.pathname.split('/');
@@ -447,7 +448,7 @@ class UpgradeToPro extends React.Component {
 
     this.state.data.map((item, i) => {
 
-      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/UpgradeToPro/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter5 + `&param3=` + lastParameter4 + `&param4=` + item.name + `&param5=` + item.id, this.state)
+      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/UpgradeToPro/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter5 + `&param3=` + lastParameter4 + `&param4=` + item.name+" "+item.mname+" "+item.lname + `&param5=` + item.id, this.state)
         .then(data => console.log(JSON.stringify(data)))
         .catch(error => console.error(error))
 
@@ -469,7 +470,7 @@ class UpgradeToPro extends React.Component {
 
     this.state.data.map((item, i) => {
 
-      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/UpgradeToPro/getexam.php?param1=` + lastParameter_id + `&param2=` + lastParameter5 + `&param3=` + lastParameter4 + `&param4=` + item.name + `&param5=` + item.id, this.state)
+      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/UpgradeToPro/getexam.php?param1=` + lastParameter_id + `&param2=` + lastParameter5 + `&param3=` + lastParameter4 + `&param4=` + item.name  + `&param5=` + item.id, this.state)
         .then(data => console.log(JSON.stringify(data)))
         .catch(error => console.error(error))
 
@@ -482,29 +483,25 @@ class UpgradeToPro extends React.Component {
     return (
       <form action="store.php" onSubmit={this.handleSubmit}>
         <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem xs={12} sm={12} md={9}>
             <Card>
               <CardHeader color="info">
-                <h4>
-                  Level:{this.getlevel()}
-                </h4>
-                <h4>
-                  Section:{this.getSection()}
-                </h4>
+              <pre style={{fontSize:"20px",fontFamily:"Comic Sans MS"}}> Class:{this.getlevel()}             Section:{this.getSection()}          Mark:{this.getMark()} </pre>
+             
               </CardHeader>
               <CardBody>
 
                 <center>
                   <div>
-                 <p style={{textAlign:"left"}}> Mark:{this.getMark()} </p> 
+                 <pre style={{textAlign:"left",fontSize:"20px",fontFamily:"Comic Sans MS"}}> Type of Exam:   {this.getType()} </pre> 
 
 
                     <table style={{ background: "white", border: " 1px solid #c5deee" }} onChange={this.props.get}>
-                      <thead style={{ border: " 5px solid black", background: "#c5deee" }}>
+                      <thead style={{ border: " 5px solid black", background: "#c5deee" ,fontSize:"20px",fontFamily:"Comic Sans MS"}}>
                         <tr>
-                          <td>First Name</td>
-                          <td>ID_Student</td>
-                          <td>Type of Exam</td>
+                        <td>ID Student</td>
+                          <td> Name Student</td>
+                          
                           <td> Mark</td>
                         </tr>
                       </thead>
@@ -514,13 +511,13 @@ class UpgradeToPro extends React.Component {
                         {
                           this.state.data.map((item, i) =>
 
-                            <tr key={i}>
-                              <td>{item.name}</td>
-                              <td>{item.id}</td>
-                              <td> {this.getType()}  </td>
+                            <tr key={i} style={{   fontSize:"18px",fontFamily:"Comic Sans MS"}}>
+                            <td>{item.id}</td>
+                              <td>{item.name +" "+item.mname+" "+item.lname}</td>
+                              
+                              
                               <td>
-                                <input type="number"  onChange={this.handleChange11}  onClick={this.updateInput} max={this.getMark()}  />
-                                
+                                <input type="number" name={item.name+" "+item.mname+" "+item.lname}  onChange={this.handleChange11}  onClick={this.updateInput} max={this.getMark()}  />
                                
                               </td>
                             </tr>

@@ -23,7 +23,7 @@ function getData(url = ``, data = {}) {
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
-        headers: {"Content-Type": "application/json", },
+        headers: { "Content-Type": "application/json", },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     })
@@ -34,55 +34,56 @@ function getData(url = ``, data = {}) {
 function postData(url, data) {
     // Default options are marked with *
     return fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-       .then(response =>  response.text())  
-  }
+        .then(response => response.text())
+}
 
 class Build extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            value:'',
-          //  data: [],
+            value: '',
+            //  data: [],
             searchString: "",
             idString: "",
             priceString: "",
         };
         this.updateInput = this.updateInput.bind(this);
         this.updateInput3 = this.updateInput3.bind(this);
-        this. handleSubmit9=this. handleSubmit9.bind(this);
+        this.handleSubmit9 = this.handleSubmit9.bind(this);
         this.search = this.search.bind(this);
-       // this.handleSubmit_grades=this.handleSubmit_grades.bind(this);
-        this.onSubmit=this.onSubmit.bind(this);
+        // this.handleSubmit_grades=this.handleSubmit_grades.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.handleSubmit5 = this.handleSubmit5.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
 
     componentDidMount() {
         var th = this;
-        var pathArray = window.location.pathname.split( '/' );
+        var pathArray = window.location.pathname.split('/');
         var lastParameter = pathArray.pop();
-        var lastParameter_id=pathArray.pop();
-        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=`+lastParameter_id+`&param2=`+lastParameter)
+        var lastParameter_id = pathArray.pop();
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/activity.php?param1=` + lastParameter_id + `&param2=` + lastParameter)
             .then(function (event) {
-                th.setState({ data: event });  })       
+                th.setState({ data: event });
+            })
     }
 
-   
+
     updateInput3 = (event) => {
         let state = {};
         state[event.target.name] = event.target.value;
@@ -97,31 +98,31 @@ class Build extends Component {
     }
 
 
-      
-    handleSubmit=(e)=>{
+
+    handleSubmit = (e) => {
         e.preventDefault();
         postData(`http://localhost/test_project-master(4)/test_project-master/src/views/Maps/testt/test.php`, this.state)
-        .then(data => console.log(JSON.stringify(data)))
-        .catch(error => console.error(error));
+            .then(data => console.log(JSON.stringify(data)))
+            .catch(error => console.error(error));
     }
 
-    handleSubmit9=(e)=>{
-       e.preventDefault();
-       return( <div> { <Add/>}</div>)    
-   }
- 
-  // handleSubmit_grades=(e)=>{
-  //  e.preventDefault();
-  //  window.location.assign('http://localhost/test_project-master(4)/test_project-master/src/views/Maps/testt/test.php');
-  // }
-   
+    handleSubmit9 = (e) => {
+        e.preventDefault();
+        return (<div> {<Add />}</div>)
+    }
 
-   onSubmit=(e)=>{
-    e.preventDefault();
-    postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/testt/test.php`, this.state)
-    .then(data => console.log(JSON.stringify(data)))
-    .catch(error => console.error(error));
-   }
+    // handleSubmit_grades=(e)=>{
+    //  e.preventDefault();
+    //  window.location.assign('http://localhost/test_project-master(4)/test_project-master/src/views/Maps/testt/test.php');
+    // }
+
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Maps/testt/test.php`, this.state)
+            .then(data => console.log(JSON.stringify(data)))
+            .catch(error => console.error(error));
+    }
 
 
 
@@ -133,7 +134,7 @@ class Build extends Component {
             .catch(error => console.error(error));
 
     }
-  
+
 
 
 
@@ -146,7 +147,7 @@ class Build extends Component {
             // console.log("event.target.value",event.target.value);
             let filtered = this.state.data.filter(item => {
                 return (
-                   // item.name == event.target.value ||
+                    // item.name == event.target.value ||
                     item.Type.toLowerCase().includes(event.target.value.toLowerCase()) ||
                     item.description.toLowerCase().includes(event.target.value.toLowerCase())
 
@@ -163,12 +164,12 @@ class Build extends Component {
                 ...this.state,
                 data: this.state.data,
                 searchString: "",
-               // idString: "",
-               // priceString: ""
+                // idString: "",
+                // priceString: ""
             });
             setTimeout(() => {
                 this.componentDidMount();
-              }, 50);
+            }, 50);
 
         }
     };
@@ -179,11 +180,11 @@ class Build extends Component {
         const {
             searchString
         } = this.state;
-        
+
 
         const styleInput = {
             width: "45%",
-           alignContent: "Center",
+            alignContent: "Center",
             height: "30px",
             margin: "3px 0",
             border: "1px solid #ccc",
@@ -192,78 +193,63 @@ class Build extends Component {
             borderTopRightRadius: "10px",
             borderTopLeftRadius: "10px",
             alignItems: "Center",
-           // color:{"danger"},       
-          };
-          const style11={ alignContent: "Left", width: "40%", color: "#000", margin: "3px 0", height: "30px", border: "1px solid #ccc", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
+            // color:{"danger"},       
+        };
+        const style11 = { alignContent: "Left", width: "40%", color: "#000", margin: "3px 0", height: "30px", border: "1px solid #000", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" };
         return (
             /*  <form  action="test.php" onSubmit={this.handleSubmit} > */
-                <div className="Table">
-                
-                <label  style={{ color: "#9fe58a", alignContent: "Center",height: "30px" } }>Search By Type/Description</label>
+            <div className="Table">
                 <input
                     style={style11}
                     type="search"
                     value={searchString}
                     onChange={this.search}
-                    placeholder="                                                          Search"
+                    placeholder="Search"
                 />
 
 
-<center>
-            <div>
-
-
-                                                  
-                                                            <table style={{ background: "white", border: " 1px solid #9fe58a" }} onChange={this.props.get}>
-                                                                <thead style={{ border: " 5px solid #9fe58a", background: "#9fe58a" }}>
-                                                                    <tr>
-                                                                        <td>Type Of Activity</td>
-                                                                        <td>Simple Description</td>
-                                                                         <td>Behavior</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                               
-                        {
-                                this.state.data.map((item, i) =>
-                                    <tr key={i}>
-                                        
-                                         {/*<tr>
-                                          <input   style={styleInput} type="text" id="submit" name="submit" value={item.Type} onChange={this.updateInput3}>
-                                          </input> 
-                                          <input   style={styleInput} type="text" id="submit" name="submit" value={item.description} onChange={this.updateInput3}>
-                                          </input> 
-                                          </tr> */}
-
-                                           <td>{item.Type}</td>
-                                           <td>{item.description}</td>
-                                           <td>
-                                           <Button color="white" type="submit" > 
-                                           <Icon style={{ fontSize: 20 }} 
-                                                    onClick={
-                                                        //this.togglePopup.bind(this)
-                                                        (e)=>{
-                                                            var pathArray = window.location.pathname.split( '/' );
-                                                            var lastParameter = pathArray.pop();
-                                                            var lastParameter_id=pathArray.pop();
-                                                            var data = [...this.state.data];
-                                                             window.location.assign('/admin/Activities_grades/'+lastParameter_id+'/'+lastParameter+'/'+item.Type+'/'+item.description);
+                <center>
+                    <div>
+                        <table style={{ background: "white", border: " 1px solid #9fe58a" }} onChange={this.props.get}>
+                            <thead style={{ border: " 5px solid #9fe58a", background: "#9fe58a" ,fontSize:"18px",fontFamily:"Comic Sans MS"}}>
+                                <tr>
+                                    <td>Type Of Activity</td>
+                                    <td>Description</td>
+                                    <td>Behavior</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.data.map((item, i) =>
+                                        <tr key={i} style={{fontSize:"18px",fontFamily:"Comic Sans MS"}}>
+                                            <td>{item.Type}</td>
+                                            <td>{item.description}</td>
+                                            <td>
+                                                <Button color="success" type="submit" style={{ fontSize: 20 }}>
+                                                    <Icon style={{ fontSize: 20 }}
+                                                        onClick={
+                                                            //this.togglePopup.bind(this)
+                                                            (e) => {
+                                                                var pathArray = window.location.pathname.split('/');
+                                                                var lastParameter = pathArray.pop();
+                                                                var lastParameter_id = pathArray.pop();
+                                                                var data = [...this.state.data];
+                                                                window.location.assign('/admin/Activities_grades/' + lastParameter_id + '/' + lastParameter + '/' + item.Type + '/' + item.description);
+                                                            }
                                                         }
-                                                    }
-                                              >add_circle 
+                                                    >add_circle
                                            </Icon> </Button>
-                                           </td>
-                                       
-                                    </tr>
-                                )
-                        }
-                        </tbody>
+                                            </td>
 
-                    </table>
-                </div>
-      </center>
-      </div>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </center>
+            </div>
         );
     }
 }

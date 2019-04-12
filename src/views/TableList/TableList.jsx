@@ -272,6 +272,7 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import InputLabel from '@material-ui/core/InputLabel';
 import Tab from '@material-ui/core/Tab';
 import Store from "@material-ui/icons/Store";
+import Icon from '@material-ui/core/Icon';
 import TabList from '@material-ui/core/Tab';
 import Code from "@material-ui/icons/Code";
 import TabPanel from '@material-ui/core/Tab';
@@ -401,13 +402,15 @@ class TypographyPage extends React.Component {
     // this.handleSubmit_upload = this.handleSubmit_upload.bind(this);
     // this.handleSubmit3 = this.handleSubmit3.bind(this);
     // this.handleSubmit4 = this.handleSubmit4.bind(this);
-     this.getNumStud=this.getNumStud.bind(this);
+    this.getNumStud = this.getNumStud.bind(this);
     this.search = this.search.bind(this);
     this.search1 = this.search1.bind(this);
     this.search2 = this.search2.bind(this);
     this.search3 = this.search3.bind(this);
-    this.getSection=this.getSection.bind(this);
-    this.getlevel=this.getlevel.bind(this);
+    this.getSection = this.getSection.bind(this);
+    this.getlevel = this.getlevel.bind(this);
+    this.getCount = this.getCount.bind(this);
+
 
 
   }
@@ -583,7 +586,7 @@ handlechangedate=(e)=>{
         ...this.state,
         data: this.state.data,
         searchString: "",
-    
+
         // idString: "",
         // priceString: ""
       });
@@ -603,7 +606,7 @@ handlechangedate=(e)=>{
           // item.name == event.target.value ||
           // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
           // item.id == Number(event.target.value) ||
-        
+
           item.id.toLowerCase().includes(event.target.value.toLowerCase())
           //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
           //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
@@ -618,9 +621,9 @@ handlechangedate=(e)=>{
       this.setState({
         ...this.state,
         data: this.state.data,
-      
+
         searchString1: "",
-      
+
         // idString: "",
         // priceString: ""
       });
@@ -640,7 +643,7 @@ handlechangedate=(e)=>{
           // item.name == event.target.value ||
           // item.mname.toLowerCase().includes(event.target.value.toLowerCase()) ||
           // item.id == Number(event.target.value) ||
-        
+
           item.addresss.toLowerCase().includes(event.target.value.toLowerCase())
           //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
           //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
@@ -655,9 +658,9 @@ handlechangedate=(e)=>{
       this.setState({
         ...this.state,
         data: this.state.data,
-      
+
         searchString2: "",
-      
+
         // idString: "",
         // priceString: ""
       });
@@ -675,7 +678,7 @@ handlechangedate=(e)=>{
       // console.log("event.target.value",event.target.value);
       let filtered = this.state.data.filter(item => {
         return (
-       
+
           item.date.toLowerCase().includes(event.target.value.toLowerCase())
           //item.type.toLowerCase().includes(event.target.value.toLowerCase()) ||
           //item.semester.toLowerCase().includes(event.target.value.toLowerCase())
@@ -690,9 +693,9 @@ handlechangedate=(e)=>{
       this.setState({
         ...this.state,
         data: this.state.data,
-      
+
         searchString3: "",
-      
+
         // idString: "",
         // priceString: ""
       });
@@ -711,10 +714,21 @@ handlechangedate=(e)=>{
   }
   getSection = () => {
     var pathArray = window.location.pathname.split('/');
-    var last=pathArray.pop();
-   
+    var last = pathArray.pop();
+
     var lastParameter_id = pathArray.pop();
     return lastParameter_id;
+  }
+  getSection = () => {
+    var pathArray = window.location.pathname.split('/');
+    var last = pathArray.pop();
+
+    var lastParameter_id = pathArray.pop();
+    return lastParameter_id;
+  }
+  getCount = () => {
+
+    return <Countstudent />;
   }
   getNumStud = () => {
     var pathArray = window.location.pathname.split('/');
@@ -722,27 +736,27 @@ handlechangedate=(e)=>{
     var lastParameter1 = pathArray.pop();
     var url = "/admin/Students/" + lastParameter;
     var th = this;
-    this.state.data.map((row,i)=>{
-     
-   
-    getData(`http://localhost/test_project-master (4)/test_project-master/src/views/TableList/countstudent.php?param1=` + lastParameter1 + `&param2=` + lastParameter)
-      .then(function (event) {
-        th.setState({
-          data: event//.data
-        });
-      }) 
+    this.state.data.map((row, i) => {
+
+
+      getData(`http://localhost/test_project-master (4)/test_project-master/src/views/TableList/countstudent.php?param1=` + lastParameter1 + `&param2=` + lastParameter)
+        .then(function (event) {
+          th.setState({
+            data: event//.data
+          });
+        })
     })
-   
-}
-handleClick1 = (e) => {
-  e.preventDefault();
-  window.location.assign('/admin/Classes/');
-}
+
+  }
+  handleClick1 = (e) => {
+    e.preventDefault();
+    window.location.assign('/admin/Classes/');
+  }
 
 
   render() {
     // var props;
-    const { searchString ,searchString1,searchString2 ,searchString3} = this.state;
+    const { searchString, searchString1, searchString2, searchString3 } = this.state;
     const { classes } = this.props;
     const styleInput = {
       width: "100%",
@@ -760,8 +774,17 @@ handleClick1 = (e) => {
     return (
 
       <div style={{ alignContent: "Center" }}>
-      <Button onClick={this.handleClick1} style={{background:"#000"}}> <ThreeSixtyIcon />
-Back</Button>
+        <Button onClick={this.handleClick1} style={{ background: "#000" }}> <ThreeSixtyIcon />
+          Back To Classes</Button>
+        <Button onClick={(e) => {
+          e.preventDefault();
+          var pathArray = window.location.pathname.split('/');
+          var lastParameter = pathArray.pop();
+          var lastParameter1 = pathArray.pop();
+
+          window.location.assign('/admin/Grades/' + lastParameter1 + '/' + lastParameter);
+        }} style={{ background: "#000" }}> <Icon style={{ fontSize: "20px" }}>note_add</Icon>
+          Gades</Button>
         <GridContainer justify="center">
 
           <GridItem xs={12} sm={12} md={10}>
@@ -780,51 +803,51 @@ Back</Button>
                             <CardHeader color="info">
                               <h4 className={classes.cardTitleWhite}>Search By Filter For Students</h4>
                               <p className={classes.cardCategoryWhite}> </p>
-                             
+
                             </CardHeader>
 
                             <CardBody>
                               <div className={classes.searchWrapper} style={{ textAlign: "center" }} >
-                              <pre style={{textAlign:"left",fontSize:"20px"}}> Class:{this.getlevel()}         Section:{this.getSection()}      Number of Student:<Countstudent /></pre> 
-                                
+                                <pre style={{ textAlign: "left", fontSize: "20px", display: "inline" }}> Class:{this.getlevel()}     Section:{this.getSection()}      Number of Student:<Countstudent /></pre>
 
-                                <input style={{ width: "15%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                  type="number" placeholder="Search By ID" name="search2" value={searchString1}
-                                  onChange={this.search1} />
-                                <Button color="white" justIcon round name="search" type="submit" value="search"
-                                  onClick={this.onClick} >
+                                <pre>
+                                  <input style={{ width: "15%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                    type="number" placeholder="Search By ID" name="search2" value={searchString1}
+                                    onChange={this.search1} />
+                                  <Button color="white" justIcon round name="search" type="submit" value="search"
+                                    onClick={this.onClick} >
 
-                                  <Search />
+                                    <Search />
 
-                                </Button>
-                                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                  type="search" placeholder="Search By Name" name="search1" value={searchString}
-                                  onChange={this.search}></input>
-                                <Button color="white" justIcon round name="search" type="submit" value="search"
-                                  onClick={this.onClick}>
-                                
-                                  <Search />
+                                  </Button>
+                                  <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                    type="search" placeholder="Search By Name" name="search1" value={searchString}
+                                    onChange={this.search}></input>
+                                  <Button color="white" justIcon round name="search" type="submit" value="search"
+                                    onClick={this.onClick}>
 
-                                </Button>
-                                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                  type="search" placeholder="Search By Address" name="search3" value={searchString2}
-                                  onChange={this.search2} />
-                                <Button color="white" justIcon round name="search" type="submit" value="search"
-                                  onClick={this.onClick} >
+                                    <Search />
 
-                                  <Search />
+                                  </Button>
+                                  <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                    type="search" placeholder="Search By Address" name="search3" value={searchString2}
+                                    onChange={this.search2} />
+                                  <Button color="white" justIcon round name="search" type="submit" value="search"
+                                    onClick={this.onClick} >
 
-                                </Button>
-                                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                  type="search" placeholder="Search By Date" name="search4" value={searchString3}
-                                  onChange={this.search3} />
-                                <Button color="white" justIcon round name="search" type="submit" value="search"
-                                  onClick={this.onClick} >
+                                    <Search />
 
-                                  <Search />
+                                  </Button>
+                                  <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                                    type="search" placeholder="Search By Date" name="search4" value={searchString3}
+                                    onChange={this.search3} />
+                                  <Button color="white" justIcon round name="search" type="submit" value="search"
+                                    onClick={this.onClick} >
 
-                                </Button>
+                                    <Search />
 
+                                  </Button>
+                                </pre>
                                 <CardBody>
 
 
@@ -844,13 +867,13 @@ Back</Button>
 
                                     }}>
 
-                                      <TableHead style={{ color: 'rgb(255, 139, 173)',fontSize:"20px", Width: "50%", align: "center", background: "rgb(241, 245, 248)" }}>
-                                        <TableRow style={{fontSize:"20px", }}>
+                                      <TableHead style={{ color: 'rgb(255, 139, 173)', fontSize: "20px", Width: "50%", align: "center", background: "rgb(241, 245, 248)" }}>
+                                        <TableRow style={{ fontSize: "20px", }}>
                                           <TableCell>ID</TableCell>
                                           <TableCell >Name</TableCell>
                                           <TableCell >Date Of Brith</TableCell>
                                           <TableCell >Address</TableCell>
-                                          
+
 
 
                                         </TableRow>
@@ -866,8 +889,8 @@ Back</Button>
 
                                               <TableCell style={{ width: "30%", }}>{item.date}</TableCell>
                                               <TableCell style={{ width: "30%", }}>{item.addresss}</TableCell>
-                                            
-                                             
+
+
 
                                             </TableRow>
 

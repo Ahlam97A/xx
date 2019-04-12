@@ -15,7 +15,7 @@ $input = json_decode($payload, true);
 
 $param1=$_GET['param1'];
 $param2=$_GET['param2'];
-$sql = "SELECT name,id FROM student  Where classid='$param1' and level='$param2'";
+$sql = "SELECT * FROM student  Where classid='$param1' and level='$param2'";
 
 $myArray = array();
 

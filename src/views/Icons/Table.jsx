@@ -385,7 +385,7 @@ class Build extends Component {
         return (
             <div className="Table">
                 <table style={{ border: " 1px solid rose", align: "center" }} onChange={this.props.get}>
-                    <thead style={{ border: " 1px solid rose", background: "rose" }}>
+                    <thead style={{ border: " 1px solid rose", background: "#e3f2fd" ,fontSize:"20px",fontFamily:"Comic Sans MS"}}>
                         <tr style={{ border: " 1px solid rose" }}>
                             <th>Level</th>
                             <th>Section</th>
@@ -400,7 +400,7 @@ class Build extends Component {
                         {
                             this.state.data.map((item, i) =>
 
-                                <tr key={i}>
+                                <tr key={i} style={{fontSize:"20px",fontFamily:"Comic Sans MS"}}>
                                     <TableCell>{item.level}</TableCell>
                                     <TableCell>{item.section}</TableCell>
                                     <TableCell>

@@ -107,16 +107,16 @@ class Countstudent extends Component {
 
 
         return (
-            <div className="Table">
+        <span className="Table">
 
                 {
                     this.state.data.map((row, i) => (
-                        <div key={i}>{row}</div>
+                        <i key={i}>{row}</i>
                         
                     ))}
                     
 
-            </div>
+            </span>
         );
     }
 }

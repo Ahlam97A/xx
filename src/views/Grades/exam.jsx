@@ -8,7 +8,7 @@ import color from '@material-ui/core/colors/deepOrange';
 import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import  Search  from '@material-ui/icons/Search';
+import Search from '@material-ui/icons/Search';
 import Danger from "components/Typography/Danger.jsx";
 import Close from "@material-ui/icons/Close";
 import React, { Component } from 'react';
@@ -335,52 +335,52 @@ class Exam extends Component {
 
         return (
             <div className="Table">
-               <input style={{ width: "15%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                                            type="search" placeholder="Search By Semester" name="search2" value={searchString1}
-                                                            onChange={this.search1} />
-                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
-                                                            onClick={this.onClick} >
+                <input style={{ width: "15%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                    type="search" placeholder="Search By Semester" name="search2" value={searchString1}
+                    onChange={this.search1} />
+                <Button color="white" justIcon round name="search" type="submit" value="search"
+                    onClick={this.onClick} >
 
-                                                            <Search />
+                    <Search />
 
-                                                        </Button>
-                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                                            type="search" placeholder="Search By Subject" name="search1" value={searchString}
-                                                            onChange={this.search}></input>
-                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
-                                                            onClick={this.onClick}>
+                </Button>
+                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                    type="search" placeholder="Search By Subject" name="search1" value={searchString}
+                    onChange={this.search}></input>
+                <Button color="white" justIcon round name="search" type="submit" value="search"
+                    onClick={this.onClick}>
 
-                                                            <Search />
+                    <Search />
 
-                                                        </Button>
-                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                                            type="search" placeholder="Search By Max Point" name="search3" value={searchString2}
-                                                            onChange={this.search2} />
-                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
-                                                            onClick={this.onClick} >
+                </Button>
+                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                    type="search" placeholder="Search By Max Point" name="search3" value={searchString2}
+                    onChange={this.search2} />
+                <Button color="white" justIcon round name="search" type="submit" value="search"
+                    onClick={this.onClick} >
 
-                                                            <Search />
+                    <Search />
 
-                                                        </Button>
-                                                        <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
-                                                            type="search" placeholder="Search By Type" name="search4" value={searchString3}
-                                                            onChange={this.search3} />
-                                                        <Button color="white" justIcon round name="search" type="submit" value="search"
-                                                            onClick={this.onClick} >
+                </Button>
+                <input style={{ width: "20%", color: "#000", margin: "3px 0", height: "25px", border: "1px solid #bdbdbd", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+                    type="search" placeholder="Search By Type" name="search4" value={searchString3}
+                    onChange={this.search3} />
+                <Button color="white" justIcon round name="search" type="submit" value="search"
+                    onClick={this.onClick} >
 
-                                                            <Search />
+                    <Search />
 
-                                                        </Button>
-                                                       
+                </Button>
 
 
-              
-              
+
+
+
 
 
                 <div style={{ display: 'flex', width: '100%' }}>
-              
-               
+
+
                     <Paper style={{
                         width: "100%",
                         align: "center",
@@ -398,8 +398,7 @@ class Exam extends Component {
                         }}>
 
 
-
-                            <thead style={{ color: "#000 bold", Width: "50%", align: "center", background: "rgb(241, 245, 248)" }} >
+                            <thead style={{ color: "#000 bold", Width: "50%", align: "center", background: "rgb(241, 245, 248)",fontSize:"18px",fontFamily:"Comic Sans MS" }} >
                                 <tr >
                                     <th >Subject</th>
 
@@ -409,6 +408,7 @@ class Exam extends Component {
                                     <th >Type of Exam</th>
                                     <th >Date of Exam</th>
                                     <th >Add Grades</th>
+                                    <th >View Grades</th>
                                     <th > <Danger>
                                         <Close />
                                     </Danger></th>
@@ -418,19 +418,20 @@ class Exam extends Component {
                                 {
                                     this.state.data.map((item, key) =>
 
-                                        <TableRow key={key}>
+                                        <TableRow key={key} style={{ fontSize:"20px",fontFamily:"Comic Sans MS"  }} >
                                             {/*   <TableCell style={{ width: "10%", }}>{item.level}</TableCell>*/}
-                                            <TableCell style={{ width: "30%", }}>{item.subject}</TableCell>
+                                            <TableCell style={{ width: "20%", }}>{item.subject}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.semester}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.max}</TableCell>
                                             <TableCell style={{ width: "30%", }}>{item.type}</TableCell>
-                                            <TableCell style={{ width: "50%", }}>{item.date}</TableCell>
+                                            <TableCell style={{ width: "30%", }}>{item.date}</TableCell>
 
                                             <TableCell style={{ width: "30%", }}>
                                                 <Icon style={{ fontSize: 30 }}
                                                     onClick={
                                                         //this.togglePopup.bind(this)
                                                         (e) => {
+                                                            e.preventDefault();
                                                             var pathArray = window.location.pathname.split('/');
                                                             var lastParameter = pathArray.pop();
                                                             var lastParameter_id = pathArray.pop();
@@ -441,7 +442,22 @@ class Exam extends Component {
                                                 >add_circle
                                                </Icon>
                                             </TableCell>
+                                            <TableCell style={{fontSize: 30}}>
+                                            <Icon style={{fontSize: 30}}
+                                            onClick={
+                                                //this.togglePopup.bind(this)
+                                                (e) => {
+                                                    e.preventDefault();
+                                                    var pathArray = window.location.pathname.split('/');
+                                                    var lastParameter = pathArray.pop();
+                                                    var lastParameter_id = pathArray.pop();
+                                                    var data = [...this.state.data];
+                                                    window.location.assign('/admin/Views_grades/' + lastParameter_id + '/' + lastParameter + '/' + item.type + '/' + item.subject + '/' + item.semester + '/' + item.max);
+                                                }
+                                            }
 
+                                            >content_copy</Icon></TableCell>
+                                            
 
 
 

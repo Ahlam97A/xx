@@ -9,6 +9,7 @@ import BugReport from "@material-ui/icons/BugReport";
 import Language from "@material-ui/icons/Language";
 import Person from "@material-ui/icons/Person";
 import Activities_grades from "views/Activities_grades/Activities_grades.jsx";
+import Views_grades from "views/view_grade/views";
 import Maps from "views/Maps/Maps.jsx";
 import Icons from "views/Icons/Icons.jsx";
 import  Grades from 'views/Grades/Grades.jsx';
@@ -95,10 +96,19 @@ const dashboardRoutes = [
   },
   {
     path: "/upgrade-to-pro",
-    name: "grade ",
+    name: "Grade ",
     
     icon: Unarchive,
     component: UpgradeToPro,
+    layout: "/admin"
+  },
+  
+  {
+    path: "/Views_grades",
+    name: "View Grade ",
+    
+    icon: Unarchive,
+    component: Views_grades,
     layout: "/admin"
   },
   /*{

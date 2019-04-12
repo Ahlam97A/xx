@@ -22,7 +22,7 @@ $id=$_GET['param5'];
 
 $mark=$input[$_GET['param4']];
 
-
+$x=$input['x'];
 $sql = "INSERT INTO grades(name,id,point,type,level,id_class) VALUES ('$name','$id','$mark','$param3','$param2','$param1')";
 echo "<br>";
 echo $sql;

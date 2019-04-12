@@ -4,11 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import  Search  from '@material-ui/icons/Search';
-
+import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 import Exam from "views/Grades/exam";
 import UpgradeToPro from "views/Grades/xx"
 import React, { Component } from 'react';
-
+import Icon from '@material-ui/core/Icon';
 import Popup from "reactjs-popup";
 
 import Point from 'views/Grades/edittable';
@@ -191,8 +191,11 @@ export default class Grades extends React.Component {
     //   this.setState({ value: event.target.value }) // I tried before target.value, or nativeEvent.value
     // }
     componentDidMount() {
+        var pathArray = window.location.pathname.split('/');
+        var lastParameter = pathArray.pop();
+        var lastParameter1 = pathArray.pop();
         var th = this;
-        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/getexam.php`)
+        getData(`http://localhost/test_project-master (4)/test_project-master/src/views/Grades/getexam.php?param1=` + lastParameter1 + `&param2=` + lastParameter)
 
             .then(function (event) {
                 if (event != null) {
@@ -378,6 +381,25 @@ export default class Grades extends React.Component {
 
         return (
             <div>
+                <Button onClick={(e) => {
+          e.preventDefault();
+          var pathArray = window.location.pathname.split('/');
+          var lastParameter = pathArray.pop();
+          var lastParameter1 = pathArray.pop();
+
+          window.location.assign('/admin/Students/' + lastParameter1 + '/' + lastParameter);
+        }} style={{ background: "#000" }}> <ThreeSixtyIcon />
+          Students</Button>
+        <Button onClick={(e) => {
+          e.preventDefault();
+          var pathArray = window.location.pathname.split('/');
+          var lastParameter = pathArray.pop();
+          var lastParameter1 = pathArray.pop();
+
+          window.location.assign('/admin/Classes/' + lastParameter1 + '/' + lastParameter);
+        }} style={{ background: "#000" }}> <Icon style={{ fontSize: "20px" }}>note_add</Icon>
+          Gades</Button>
+           
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={12}>
                         <CustomTabs
@@ -417,7 +439,7 @@ export default class Grades extends React.Component {
                                                 <InputForm inputType="text" inputKey="section" inputLabel="Section " updateInput={this.updateInput} /> */}
                                                 <InputForm inputType="text" inputKey="subject" inputLabel="Subject  " updateInput={this.updateInput} />
                                                 <div style={{ display: 'flex', width: '100%' }}>
-                                                    <GridItem xs={12} sm={6} md={6} style={{ textAlign: "center" }} >
+                                                    <GridItem xs={12} sm={12} md={6} style={{ textAlign: "center" }} >
 
                                                         <InputLabel style={{ color: "#000", width: "300px", alignContent: "Center", textAlign: "center" }}> {"     "}Semester     {"   "}  </InputLabel>
                                                     </GridItem>

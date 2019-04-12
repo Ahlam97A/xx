@@ -13,11 +13,10 @@ $payload = file_get_contents('php://input');
 $input = json_decode($payload, true);
 //$x="SELECT count(*)FROM student";
 //echo $x;
-$x=$input['level'];
 
 $param1=$_GET['param1'];
 $param2=$_GET['param2'];
-$sql = "SELECT name FROM student where  level='$param1' and classid='$param2' "; 
+$sql = "SELECT * FROM student where  classid='$param1' and level='$param2'"; 
   
 /*
     if ($result) 
@@ -39,16 +38,18 @@ $sql = "SELECT name FROM student where  level='$param1' and classid='$param2' ";
     $row = $result->fetch_array(MYSQLI_ASSOC);
     $num_records = mysqli_num_rows($result);
     $numRec = array();
-    IF ($num_records >= 0){
+    if($num_records >= 0){
     
        // $numRec = array();
        $numRec[]=$num_records;
-        echo json_encode($numRec);
+        echo json_encode($numRec,JSON_NUMERIC_CHECK);
     
       
     }
     //echo "<p>ahlam</p>";
-  /*
+
+
+/*
 $myArray = array();
 $x=array();
 if ($result = $link->query($sql)) {
@@ -59,7 +60,7 @@ if ($result = $link->query($sql)) {
           //$x[] =$result->count($row);   
         
     }
-    echo json_encode($myArray);
+    echo json_encode($myArray,JSON_NUMERIC_CHECK);
 }
  else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
