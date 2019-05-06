@@ -239,6 +239,7 @@ class Build extends Component {
                                                         }
                                                     >add_circle
                                            </Icon> </Button>
+                                           {this.componentDidMount()}
                                             </td>
 
                                         </tr>

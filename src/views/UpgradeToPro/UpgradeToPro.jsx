@@ -517,7 +517,7 @@ class UpgradeToPro extends React.Component {
                               
                               
                               <td>
-                                <input type="number" name={item.name+" "+item.mname+" "+item.lname}  onChange={this.handleChange11}  onClick={this.updateInput} max={this.getMark()}  />
+                                <input type="number" name={item.name+" "+item.mname+" "+item.lname}  onChange={this.handleChange11}  onClick={this.updateInput} min="0" max={this.getMark()}  />
                                
                               </td>
                             </tr>

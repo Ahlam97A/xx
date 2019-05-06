@@ -8,6 +8,10 @@ import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
+import SimpleModalWrapped from "views/Activities_grades/text";
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 function postData(url, data) {
   // Default options are marked with *
   return fetch(url, {
@@ -113,7 +117,7 @@ export default class Activities_grades extends React.Component {
 
     this.state.data.map((item, i) => {
 
-      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Activities_grades/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter3 + `&param3=` + lastParameter2 + `&param4=` + item.name + `&param5=` + item.id, this.state)
+      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Activities_grades/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter3 + `&param3=` + lastParameter2 + `&param4=` + item.name+" "+item.mname+" " +item.lname+ `&param5=` + item.id, this.state)
         .then(data => console.log(JSON.stringify(data)))
         .catch(error => console.error(error))
 
@@ -125,52 +129,42 @@ export default class Activities_grades extends React.Component {
     return (
       <form action="store.php" onSubmit={this.handleSubmit}>
         <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8}>
+          <GridItem xs={12} sm={12} md={10}>
             <Card>
               <CardHeader color={"success"}>
-                <h5>
-                  Behavior Of:
-                    </h5>
-                <h5>
-                  Level : {this.getlevel()}
-                </h5>
-                <h5>
-                  Section : {this.getSection()}
-                </h5>
-                <h5>
-                  Max Points For the Attitude Of Students : 10
-                    </h5>
+                <pre style={{fontSize:"18px",fontFamily:"Comic Sans MS" }}>
+                  Behavior Of:    Level : {this.getlevel()}          Section : {this.getSection()}
+              <p> Max Points For the Attitude Of Activity : 10</p>
+                    </pre>
               </CardHeader>
               <CardBody>
-
+              <p style={{fontSize:"18px",fontFamily:"Comic Sans MS" }}>Type of Activity : {this.getType()} </p>
                 <center>
                   <div>
-
-
-
+                   
                     <table style={{ background: "white", border: " 1px solid #9fe58a" }} onChange={this.props.get}>
-                      <thead style={{ border: " 5px solid #9fe58a", background: "#9fe58a" }}>
+                      <thead style={{ border: " 5px solid #9fe58a", background: "#9fe58a" ,fontSize:"18px",fontFamily:"Comic Sans MS" }}>
                         <tr>
-                          <td>First Name</td>
-                          <td>ID_Student</td>
-                          <td>Type of Activity</td>
+                        <td>ID_Student</td>
+                   
+                          <td> Name</td>
+                        
                           <td>Attitude</td>
                         </tr>
                       </thead>
                       <tbody>
-
-
                         {
                           this.state.data.map((item, i) =>
 
-                            <tr key={i}>
-                              <td>{item.name}</td>
-                              <td>{item.id}</td>
-                              <td> {this.getType()}  </td>
-                              <td>
-                                <input name={item.name} type="number" onChange={this.updateInput} />
-                              </td>
-                            </tr>
+                            <TableRow key={i} style={{fontSize:"18px",fontFamily:"Comic Sans MS" }}>
+                             <TableCell>{item.id}</TableCell>
+                              <TableCell>{item.name +" "+item.mname+" "+item.lname}</TableCell>
+                             
+                             
+                              <TableCell>
+                                <input name={item.name} type="number" onChange={this.updateInput} min="0" max="10"/>
+                              </TableCell>
+                            </TableRow>
                           )
                         }
 
@@ -190,6 +184,7 @@ export default class Activities_grades extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
+        <SimpleModalWrapped />
       </form>
     );
   }

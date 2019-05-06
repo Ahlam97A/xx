@@ -18,7 +18,7 @@ import CustomTabs from "components/CustomTabs/CustomTabs.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 //import Form from "views/UserProfile/form.tsx";
 import InputForm from './InputForm';
-
+///aaaaa
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -187,20 +187,20 @@ class UserProfile extends React.Component {
     };
     return (
       <div style={{ alignContent: "Center" }}>
-      
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8} justify="center">
-              <CustomTabs
-                title="teacher:"
-                headerColor="info"
-                tabs={[
-                  {
-                    tabName: "Personal Information",
-                    tabIcon: BugReport,
-                    tabContent: (
-                      <GridContainer justify="center">
+
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={12} md={8} >
+            <CustomTabs
+              title="teacher:"
+              headerColor="info"
+              tabs={[
+                {
+                  tabName: "Personal Information",
+                  tabIcon: BugReport,
+                  tabContent: (
+                    <GridContainer justify="center">
                       <form action="Edit.php" onSubmit={this.handleSubmit} style={{ alignContent: "Center" }}>
-                        <GridItem xs={12} sm={12} md={10} justify="center">
+                        <GridItem xs={12} sm={12} md={10} >
                           <Card justify="center">
 
                             <CardHeader color="info" justify="center">
@@ -226,51 +226,51 @@ class UserProfile extends React.Component {
                         </GridItem>
 
                       </form>
-                      </GridContainer>
-                    )
-                  },
-                  {
-                    tabName: "Password",
-                    tabIcon: BugReport,
-                    tabContent: (
-                      
-                      <form className={passwordGroupClass}>
-                        <GridItem xs={12} sm={12} md={10} justify="center">
-                          <Card justify="center">
+                    </GridContainer>
+                  )
+                },
+                {
+                  tabName: "Password",
+                  tabIcon: BugReport,
+                  tabContent: (
 
-                            <CardHeader color="info">
-                              <h4 className={classes.cardTitleWhite}>Reset Password</h4>
+                    <form className={passwordGroupClass}>
+                      <GridItem xs={12} sm={12} md={10} >
+                        <Card justify="center">
 
-                            </CardHeader>
-                            <CardBody>
+                          <CardHeader color="info">
+                            <h4 className={classes.cardTitleWhite}>Reset Password</h4>
+
+                          </CardHeader>
+                          <CardBody>
                             <GridContainer justify="center">
-                                <GridContainer justify="center">
-                              
-                                </GridContainer>
-                                </GridContainer>
-                             
-                            </CardBody>
+                              <GridContainer justify="center">
+                                
+                              </GridContainer>
+                            </GridContainer>
 
-                            <CardFooter>
-                            </CardFooter>
+                          </CardBody>
 
-                          </Card>
-                        </GridItem>
+                          <CardFooter>
+                          </CardFooter>
 
-                      </form>
-                      
+                        </Card>
+                      </GridItem>
 
+                    </form>
 
 
-                    )
-                  }
-                ]}
-              />
-            </GridItem>
 
 
-          </GridContainer>
-      
+                  )
+                }
+              ]}
+            />
+          </GridItem>
+
+
+        </GridContainer>
+
       </div>
     );
   }

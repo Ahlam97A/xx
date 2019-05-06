@@ -387,11 +387,11 @@ class Build extends Component {
                 <table style={{ border: " 1px solid rose", align: "center" }} onChange={this.props.get}>
                     <thead style={{ border: " 1px solid rose", background: "#e3f2fd" ,fontSize:"20px",fontFamily:"Comic Sans MS"}}>
                         <tr style={{ border: " 1px solid rose" }}>
-                            <th>Level</th>
+                            <th>Class</th>
                             <th>Section</th>
                             <th>Students</th>
                             <th>Grades</th>
-                            <th>Attendance</th>
+                          
                             <th>Activities</th>
                         </tr>
                     </thead>
@@ -414,7 +414,7 @@ class Build extends Component {
                                     <TableCell>
 
                                         <Button style={{ background: "#e3f2fd" }} type="submit" >
-                                            {this.send}
+                                           
                                             <a
                                                 onClick={(e) => {
                                                     e.preventDefault();
@@ -423,15 +423,7 @@ class Build extends Component {
                                                 }}> Grades</a>
                                         </Button>
                                     </TableCell>
-                                    <TableCell>
-
-                                        <Button style={{ background: "#e3f2fd" }} type="submit" ><a
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                window.location.assign('/admin/Attendance/' + item.section + '/' + item.level);
-                                            }}>Attendance</a>
-                                        </Button>
-                                    </TableCell>
+                                  
                                     <TableCell>
 
                                         <Button style={{ background: "#e3f2fd" }} type="submit" ><a

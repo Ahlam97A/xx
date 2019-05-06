@@ -73,7 +73,7 @@ function postData(url, data) {
 class EditCriteria extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { flag: false };
+        this.state = { flag: false ,data:[]};
         this.getTable = this.getTable.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onSubmit = this.onSubmit.bind(this);

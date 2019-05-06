@@ -233,7 +233,7 @@ export default class Form extends React.Component<Props, State> {
                 </div>
 
 
-                <Button disabled={this.state.signUpButtonDisabled} style={{ color: "#000548", background: "#DC143C" }} name="UpdateProfile" type="submit" value="UpdateProfile">Update </Button>
+                <Button disabled={this.state.signUpButtonDisabled} style={{ color: "#000548", background: "#2196f3" }} name="UpdateProfile" type="submit" value="UpdateProfile">Update </Button>
 
                 </form>
             </FormWithConstraints>

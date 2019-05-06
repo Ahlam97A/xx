@@ -774,9 +774,9 @@ handlechangedate=(e)=>{
     return (
 
       <div style={{ alignContent: "Center" }}>
-        <Button onClick={this.handleClick1} style={{ background: "#000" }}> <ThreeSixtyIcon />
+        <Button onClick={this.handleClick1}  name="search" type="submit" style={{ background: "#000" }} value="back"> <ThreeSixtyIcon />
           Back To Classes</Button>
-        <Button onClick={(e) => {
+        <Button   name="search" type="submit" value="add" onClick={(e) => {
           e.preventDefault();
           var pathArray = window.location.pathname.split('/');
           var lastParameter = pathArray.pop();
@@ -785,6 +785,19 @@ handlechangedate=(e)=>{
           window.location.assign('/admin/Grades/' + lastParameter1 + '/' + lastParameter);
         }} style={{ background: "#000" }}> <Icon style={{ fontSize: "20px" }}>note_add</Icon>
           Gades</Button>
+
+
+          <Button   name="search" type="submit" value="add" onClick={(e) => {
+          e.preventDefault();
+          var pathArray = window.location.pathname.split('/');
+          var lastParameter = pathArray.pop();
+          var lastParameter1 = pathArray.pop();
+
+          window.location.assign('/admin/Activities/' + lastParameter1 + '/' + lastParameter);
+        }} style={{ background: "#000" }}> <Icon style={{ fontSize: "20px" }}>note_add</Icon>
+          Activity</Button>
+
+
         <GridContainer justify="center">
 
           <GridItem xs={12} sm={12} md={10}>
@@ -850,14 +863,6 @@ handlechangedate=(e)=>{
                                 </pre>
                                 <CardBody>
 
-
-
-                                  <Paper style={{
-                                    width: "100%",
-                                    align: "center",
-                                    size: "30%",
-                                    align: "center",
-                                  }}>
                                     <Table style={{
                                       width: "100%",
                                       align: "center",
@@ -904,12 +909,7 @@ handlechangedate=(e)=>{
 
                                       </TableBody>
                                     </Table>
-                                  </Paper>
-
-
-
-
-
+                                 
                                 </CardBody>
                               </div>
                             </CardBody>

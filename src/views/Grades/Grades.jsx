@@ -396,9 +396,9 @@ export default class Grades extends React.Component {
           var lastParameter = pathArray.pop();
           var lastParameter1 = pathArray.pop();
 
-          window.location.assign('/admin/Classes/' + lastParameter1 + '/' + lastParameter);
+          window.location.assign('/admin/Activities/' + lastParameter1 + '/' + lastParameter);
         }} style={{ background: "#000" }}> <Icon style={{ fontSize: "20px" }}>note_add</Icon>
-          Gades</Button>
+          Activities</Button>
            
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={12}>

@@ -63,14 +63,14 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   
-  {
+ /* {
     path: "/Attendance",
     name: "Attendance",
    
     icon:  Person,
     component: Attendance,
     layout: "/admin"
-  },
+  },*/
   {
     path: "/Activities",
     name: "Activities",

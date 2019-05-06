@@ -186,13 +186,13 @@ class Table1 extends Component {
                     width: "100%",
                     align: "center",
                     size: "100%",
-                    align: "center",
+                  
                 }}>
                     <Table style={{
                         width: "30%",
                         align: "center",
                         size: "50%"
-                        , minWidth: 100, align: "center"
+                        , minWidth: 100
 
                     }}>
 
