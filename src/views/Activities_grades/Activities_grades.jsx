@@ -117,7 +117,7 @@ export default class Activities_grades extends React.Component {
 
     this.state.data.map((item, i) => {
 
-      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Activities_grades/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter3 + `&param3=` + lastParameter2 + `&param4=` + item.name+" "+item.mname+" " +item.lname+ `&param5=` + item.id, this.state)
+      postData(`http://localhost/test_project-master (4)/test_project-master/src/views/Activities_grades/store.php?param1=` + lastParameter_id + `&param2=` + lastParameter3 + `&param3=` + lastParameter2 + `&param4=` + item.name+" "+item.mname+" "+item.lname+ `&param5=` + item.id, this.state)
         .then(data => console.log(JSON.stringify(data)))
         .catch(error => console.error(error))
 
@@ -162,7 +162,7 @@ export default class Activities_grades extends React.Component {
                              
                              
                               <TableCell>
-                                <input name={item.name} type="number" onChange={this.updateInput} min="0" max="10"/>
+                                <input  name={item.name+" "+item.mname+" "+item.lname}  type="number" onChange={this.updateInput} min="0" max="10"/>
                               </TableCell>
                             </TableRow>
                           )
